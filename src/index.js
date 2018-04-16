@@ -8,12 +8,13 @@ import App from './App';
 
 // Stores
 import authStore from './stores/authStore';
+import channelStore from './stores/channelStore';
 
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
   <BrowserRouter>
-    <App authStore={authStore}/>
+    <App authStore={authStore} channelStore={channelStore}/>
   </BrowserRouter>,
   document.getElementById('root')
 );

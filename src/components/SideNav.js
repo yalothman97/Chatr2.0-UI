@@ -9,6 +9,7 @@ import faPlusCircle from '@fortawesome/fontawesome-free-solid/faPlusCircle';
 
 // Components
 import ChannelNavLink from './ChannelNavLink';
+import {observer} from 'mobx-react';
 
 class SideNav extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class SideNav extends React.Component {
   }
 
   render () {
-    const channelLinks = [{name: "all"}].map(
+    const channelLinks = this.props.channelStore.channels.map(
       channel => <ChannelNavLink key={channel.name} channel={channel} />
     )
     return (
@@ -46,4 +47,4 @@ class SideNav extends React.Component {
   }
 }
 
-export default SideNav;
+export default observer(SideNav);

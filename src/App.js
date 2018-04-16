@@ -8,10 +8,10 @@ import SignupModal from './components/SignupModal';
 import Footer from './components/Footer';
 
 function App(props) {
-  const authStore = props.authStore;
+  const {authStore, channelStore} = props;
   return (
     <div className="content-wrapper">
-      <NavBar authStore={authStore}/>
+      <NavBar authStore={authStore} channelStore={channelStore}/>
       <LogoutModal authStore={authStore}/>
       <LoginModal authStore={authStore}/>
       <SignupModal authStore={authStore}/>
