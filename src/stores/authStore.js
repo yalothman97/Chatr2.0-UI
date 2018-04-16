@@ -1,6 +1,7 @@
 import React from 'react';
 import {decorate, observable, computed} from 'mobx';
 import axios from 'axios';
+import setAuthToken from './axiosConfig';
 
 class AuthStore {
   constructor() {
@@ -24,10 +25,12 @@ class AuthStore {
     localStorage.removeItem("token");
     this.currentUser = null;
     this.token = null;
+    setAuthToken();
+    console.log(axios.defaults)
   }
 
   storeUser(type) {
-    return axios.post(`http://localhost:8000/${type}/`, {
+    return axios.post(`/${type}/`, {
       username: this.username,
       password: this.password
     })
@@ -38,6 +41,7 @@ class AuthStore {
         this.currentUser = username;
         this.token = token;
         this.resetForm();
+        setAuthToken();
       })
       .catch(err => {
         Object.entries(err.response.data).forEach(
@@ -50,7 +54,6 @@ class AuthStore {
   }
 
   resetForm() {
-    console.log("here")
     this.error = [];
     this.username = "";
     this.password = "";
