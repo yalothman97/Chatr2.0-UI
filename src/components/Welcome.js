@@ -5,7 +5,7 @@ import getRandomMessage from '../data/welcomeMessages';
 class Welcome extends Component {
   constructor(props) {
     super(props);
-    this.state = {welcomeMessage: ""}
+    this.state = {welcomeMessage: getRandomMessage()}
   }
 
   componentDidMount() {
