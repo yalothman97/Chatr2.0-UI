@@ -71,7 +71,12 @@ body.fixed-nav {
   display: table;
   width: 100%;
   height: calc(100vh - 56px - 56px);
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%), url("https://picsum.photos/g/1280/720/?random");
+  background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.1) 100%
+    ),
+    url("https://picsum.photos/g/1280/720/?random");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -85,12 +90,12 @@ body.fixed-nav {
 }
 
 .overlay {
-    background-color: rgba(0, 0, 0, 0.4);
-    position:absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
 }
 
 @media (min-width: 992px) {
@@ -100,7 +105,11 @@ body.fixed-nav {
 }
 
 .message-list {
-  height: calc(100vh - 56px - 56px);
+  min-height: calc(100vh - 56px - 56px);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 #mainNav .navbar-collapse {

@@ -9,44 +9,79 @@ import { fetchMessages } from "../store/actions";
 import MessageCard from "./MessageCard";
 
 class MessageList extends Component {
+  channel = {};
+
   componentDidMount() {
-    if (this.props.channels.channels.length)
-      this.props.fetchMessages(this.findChannel());
+    this.props.fetchMessages(this.findChannel());
   }
 
   componentDidUpdate(prevProps) {
+    this.scrollToBottom(!!prevProps.channels.length ? "auto" : "smooth");
     if (
       prevProps.match.params.channelName !==
         this.props.match.params.channelName ||
-      this.props.channels.channels.length !== prevProps.channels.channels.length
+      prevProps.channels.length !== this.props.channels.length
     ) {
       this.props.fetchMessages(this.findChannel());
     }
   }
 
+  scrollToBottom = behavior => {
+    if (this.messagesEnd)
+      this.messagesEnd.scrollIntoView({ behavior: behavior });
+  };
+
   findChannel = () => {
-    const { channels } = this.props.channels;
+    const { channels } = this.props;
     const { channelName } = this.props.match.params;
-    return channels.find(channel => channel.name.slugify() === channelName);
+    return (
+      channels.find(channel => channel.name.slugify() === channelName) || {}
+    );
+  };
+
+  getContent = () => {
+    const { loading } = this.props;
+
+    if (loading) return <h1 style={{ color: "white" }}>LOADING...</h1>;
+
+    const { messages } = this.channel;
+
+    return messages.map(message => (
+      <MessageCard key={message.id} message={message} />
+    ));
   };
 
   render() {
-    const { channels, user } = this.props;
+    const { user } = this.props;
+    this.channel = this.findChannel();
+    let image_url =
+      this.channel.image_url || "https://picsum.photos/1280/720/?random";
 
-    if (channels.loading) return <h1>LOADING...</h1>;
     if (!user) return <Redirect to="/welcome" />;
 
-    const { messages } = this.findChannel() || { messages: [] };
-    const messageCards = messages.map(message => (
-      <MessageCard key={message.id} message={message} />
-    ));
-    return <div className="container-fluid message-list">{messageCards}</div>;
+    return (
+      <div
+        className="container-fluid message-list py-3"
+        style={{
+          backgroundImage: `url(${image_url})`
+        }}
+      >
+        {this.getContent()}
+        <div
+          style={{ float: "left", clear: "both" }}
+          ref={el => {
+            this.messagesEnd = el;
+          }}
+        />
+      </div>
+    );
   }
 }
 
 const mapStateToProps = ({ auth, channels }) => ({
   user: auth.user,
-  channels
+  channels: channels.channels,
+  loading: channels.loading
 });
 
 const mapDispatchToProps = {

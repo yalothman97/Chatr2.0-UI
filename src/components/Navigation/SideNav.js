@@ -2,9 +2,6 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-// Scripts
-import main from "../../assets/js/main";
-
 // Actions
 import { fetchChannels } from "../../store/actions";
 

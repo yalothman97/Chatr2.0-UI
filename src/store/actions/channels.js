@@ -21,24 +21,30 @@ export const fetchChannels = () => {
   };
 };
 
-let timestamp = "";
+let interval = null;
 
 export const fetchMessages = channel => {
-  return async dispatch => {
-    dispatch({
-      type: SET_LOADING
-    });
-    try {
-      const res = await instance.get(
-        `/channels/${channel.id}/?latest=${timestamp}`
-      );
-      const messages = res.data;
-      channel.messages = messages;
-      dispatch({
-        type: FETCH_MESSAGES
-      });
-    } catch (error) {
-      console.error(error);
+  return dispatch => {
+    if (channel) {
+      dispatch({ type: SET_LOADING });
+      if (interval) clearInterval(interval);
+      interval = setInterval(async () => {
+        try {
+          const timestamp = channel.messages.length
+            ? channel.messages[channel.messages.length - 1].timestamp
+            : "";
+          const res = await instance.get(
+            `/channels/${channel.id}/?latest=${timestamp}`
+          );
+          const messages = res.data;
+          channel.messages.push(...messages);
+          dispatch({
+            type: FETCH_MESSAGES
+          });
+        } catch (error) {
+          console.error(error);
+        }
+      }, 3000);
     }
   };
 };
