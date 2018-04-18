@@ -46,7 +46,7 @@ class AuthStore {
         Object.entries(err.response.data).forEach(
           ([errType, errList]) =>
             this.error = this.error.concat(errList.map(
-              message => <p key={errType+message}><strong>{errType}:</strong> {message}</p>
+              message => <div className="alert alert-danger" role="alert" key={errType+message}><strong>{errType}:</strong> {message}</div>
             ))
         );
       });

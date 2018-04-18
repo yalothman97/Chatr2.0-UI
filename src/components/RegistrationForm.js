@@ -6,9 +6,7 @@ function RegistationForm(props) {
   return (
     <div>
       <form>
-        {authStore.error.length > 0 && (
-          <div className="alert alert-danger" role="alert">{authStore.error}</div>
-        )}
+        {authStore.error}
         <div className="form-group">
           <input className="form-control"
             type="text"

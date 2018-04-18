@@ -14,7 +14,7 @@ import ChannelNavLink from './ChannelNavLink';
 
 function SideNav(props) {
 
-    const channelLinks = props.channelStore.channels.map(
+    const channelLinks = props.authStore.isLoggedIn && props.channelStore.channels.map(
       channel => <ChannelNavLink key={channel.name} channel={channel} channelStore={props.channelStore}/>
     )
     return (
@@ -30,10 +30,7 @@ function SideNav(props) {
         </ul>
         <ul className="navbar-nav sidenav-toggler">
           <li className="nav-item">
-            <a className="nav-link text-center" id="sidenavToggler"
-              onClick={() => this.setState(prevState => {
-                return {collapsed: !prevState.collapsed}
-              })}>
+            <a className="nav-link text-center" id="sidenavToggler">
               <FontAwesomeIcon icon={faAngleLeft} />
             </a>
           </li>

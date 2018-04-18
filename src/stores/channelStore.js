@@ -30,8 +30,8 @@ class ChannelStore {
     }
   }
 
-  setCurrentChannel(channel) {
-    this.currentChannel = channel;
+  setCurrentChannel(channelName) {
+    this.currentChannel = this.channels.find(channel => channel.name === channelName);
     this.fetchMessagesForChannel();
   }
 }
@@ -44,6 +44,5 @@ decorate(ChannelStore, {
 
 const channelStore = new ChannelStore();
 channelStore.fetchChannels()
-  .then((channulusPrime) => channelStore.setCurrentChannel(channulusPrime))
 
 export default channelStore;

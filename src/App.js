@@ -21,7 +21,12 @@ function App(props) {
         channelStore.loading ? "loading..." :
         <Switch>
           <Route exact path='/' render={() => <Redirect to={`/channels/${channelStore.channels[0].name}`}/>} />
-          <Route path='/channels/:channelName' render={(props) => <MessageList {...props} channelStore={channelStore}/>} />
+          <Route path='/channels/:channelName' render={
+            (props) => {
+              channelStore.setCurrentChannel(props.match.params.channelName)
+              return <MessageList {...props} channelStore={channelStore}/>
+            }
+          } />
         </Switch>
       }
       <LogoutModal authStore={authStore}/>

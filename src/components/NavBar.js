@@ -14,7 +14,7 @@ function NavBar(props) {
         <span className="navbar-toggler-icon"></span>
       </button>
       <div className="collapse navbar-collapse" id="navbarResponsive">
-        <SideNav channelStore={props.channelStore}/>
+        <SideNav channelStore={props.channelStore} authStore={props.authStore}/>
         <ul className="navbar-nav ml-auto">
           <span className="navbar-text">
             {props.authStore.currentUser}

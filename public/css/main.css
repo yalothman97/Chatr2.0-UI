@@ -99,7 +99,12 @@ body.fixed-nav {
 }
 
 .message-list {
-  height: calc(100vh - 56px - 56px);
+  min-height: calc(100vh - 56px - 56px);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%), url("https://picsum.photos/1280/720/?random");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 #mainNav .navbar-collapse {
