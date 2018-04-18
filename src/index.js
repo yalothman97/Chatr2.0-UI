@@ -24,3 +24,18 @@ ReactDOM.render(
   document.getElementById("root")
 );
 registerServiceWorker();
+
+// Prototype Extensions
+String.prototype.slugify = function() {
+  // <-- removed the argument
+  let str = this; // <-- added this statement
+
+  str = str
+    .replace(/^\s+|\s+$/g, "") // trim
+    .toLowerCase()
+    .replace(/[^a-z0-9 -]/g, "") // remove invalid chars
+    .replace(/\s+/g, "-") // collapse whitespace and replace by -
+    .replace(/-+/g, "-"); // collapse dashes
+
+  return str;
+};

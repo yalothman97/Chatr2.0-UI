@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+
 import getRandomMessage from "../data/welcomeMessages";
 
 class Welcome extends Component {
@@ -17,6 +19,9 @@ class Welcome extends Component {
   }
 
   render() {
+    const { user, channels } = this.props;
+    if (user && channels.length)
+      return <Redirect to={`/channels/${channels[0].name.slugify()}`} />;
     return (
       <header className="masthead d-flex">
         <div className="container text-center my-auto z-1">
@@ -34,4 +39,9 @@ class Welcome extends Component {
   }
 }
 
-export default Welcome;
+const mapStateToProps = ({ auth, channels }) => ({
+  user: auth.user,
+  channels: channels.channels
+});
+
+export default connect(mapStateToProps)(Welcome);

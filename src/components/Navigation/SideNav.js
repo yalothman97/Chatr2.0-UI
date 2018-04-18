@@ -1,5 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+
+// Scripts
+import main from "../../assets/js/main";
+
+// Actions
+import { fetchChannels } from "../../store/actions";
 
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,19 +23,26 @@ class SideNav extends React.Component {
   state = { collapsed: false };
 
   render() {
-    const channelLinks = [{ name: "all" }].map(channel => (
+    const { user, channels } = this.props;
+    const channelLinks = channels.map(channel => (
       <ChannelNavLink key={channel.name} channel={channel} />
     ));
     return (
       <div>
         <ul className="navbar-nav navbar-sidenav" id="exampleAccordion">
-          <li className="nav-item" data-toggle="tooltip" data-placement="right">
-            <Link className="nav-link heading" to="/createChannel">
-              <span className="nav-link-text mr-2">Channels</span>
-              <FontAwesomeIcon icon={faPlusCircle} />
-            </Link>
-          </li>
-          {channelLinks}
+          {user ? (
+            <>
+              <li className="nav-item">
+                <Link className="nav-link heading" to="/createChannel">
+                  <span className="nav-link-text mr-2">Channels</span>
+                  <FontAwesomeIcon icon={faPlusCircle} />
+                </Link>
+              </li>
+              {channelLinks}
+            </>
+          ) : (
+            <li className="nav-item" />
+          )}
         </ul>
         <ul className="navbar-nav sidenav-toggler">
           <li className="nav-item">
@@ -52,4 +66,16 @@ class SideNav extends React.Component {
   }
 }
 
-export default SideNav;
+const mapStateToProps = ({ auth, channels }) => ({
+  user: auth.user,
+  channels: channels.channels
+});
+
+const mapDispatchToProps = { fetchChannels };
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(SideNav)
+);

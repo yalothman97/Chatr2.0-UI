@@ -21,6 +21,7 @@ body.fixed-nav {
 
 .content-wrapper {
   min-height: calc(100vh - 56px);
+  overflow-y: auto;
 }
 
 .scroll-to-top {
@@ -96,6 +97,10 @@ body.fixed-nav {
   .masthead h1 {
     font-size: 5.5rem;
   }
+}
+
+.message-list {
+  height: calc(100vh - 56px - 56px);
 }
 
 #mainNav .navbar-collapse {
@@ -204,6 +209,8 @@ body.fixed-nav {
     position: absolute;
     top: 0;
     left: 0;
+    /* overflow-x: hidden; */
+    overflow-y: auto;
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
