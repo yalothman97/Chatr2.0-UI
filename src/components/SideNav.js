@@ -1,5 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {observer} from 'mobx-react';
+import {withRouter} from 'react-router-dom';
 
 // Fontawesome
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
@@ -9,17 +11,11 @@ import faPlusCircle from '@fortawesome/fontawesome-free-solid/faPlusCircle';
 
 // Components
 import ChannelNavLink from './ChannelNavLink';
-import {observer} from 'mobx-react';
 
-class SideNav extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {collapsed: false}
-  }
+function SideNav(props) {
 
-  render () {
-    const channelLinks = this.props.channelStore.channels.map(
-      channel => <ChannelNavLink key={channel.name} channel={channel} />
+    const channelLinks = props.channelStore.channels.map(
+      channel => <ChannelNavLink key={channel.name} channel={channel} channelStore={props.channelStore}/>
     )
     return (
       <div>
@@ -38,13 +34,12 @@ class SideNav extends React.Component {
               onClick={() => this.setState(prevState => {
                 return {collapsed: !prevState.collapsed}
               })}>
-              <FontAwesomeIcon icon={this.state.collapsed ? faAngleRight : faAngleLeft} />
+              <FontAwesomeIcon icon={faAngleLeft} />
             </a>
           </li>
         </ul>
       </div>
     );
-  }
 }
 
-export default observer(SideNav);
+export default withRouter(observer(SideNav));

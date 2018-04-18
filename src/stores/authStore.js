@@ -26,7 +26,6 @@ class AuthStore {
     this.currentUser = null;
     this.token = null;
     setAuthToken();
-    console.log(axios.defaults)
   }
 
   storeUser(type) {
