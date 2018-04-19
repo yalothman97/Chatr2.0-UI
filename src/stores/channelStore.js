@@ -15,6 +15,7 @@ class ChannelStore {
         channels.forEach(channel => {
           channel.messages = [];
           channel.newMessage = "";
+          channel.timestamp = null;
         })
         this.channels = channels;
         this.loading = false;
@@ -24,17 +25,26 @@ class ChannelStore {
   }
 
   fetchMessagesForChannel() {
+    const {currentChannel} = this;
     if (this.currentChannel) {
-      return axios.get(`/channels/${this.currentChannel.id}/`)
+      return axios.get(`/channels/${currentChannel.id}/?latest=${currentChannel.timestamp || ''}`)
         .then(res => res.data)
-        .then(messages => this.currentChannel.messages = messages)
+        .then(messages => {
+          console.log(messages)
+          if(messages.length) {
+            currentChannel.timestamp = messages[messages.length-1].timestamp;
+            currentChannel.messages = currentChannel.messages.slice().concat(messages);
+          }
+        })
         .catch(err => console.error(err));
     }
   }
 
   setCurrentChannel(channelName) {
+    if (this.currentChannel.pollingInterval) clearInterval(this.currentChannel.pollingInterval)
     this.currentChannel = this.channels.find(channel => channel.name === channelName);
-    this.fetchMessagesForChannel();
+    this.fetchMessagesForChannel()
+    this.currentChannel.pollingInterval = setInterval(() => this.fetchMessagesForChannel(), 3000);
   }
 
   sendMessage() {
