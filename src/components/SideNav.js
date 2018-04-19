@@ -6,7 +6,6 @@ import {withRouter} from 'react-router-dom';
 // Fontawesome
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faAngleLeft from '@fortawesome/fontawesome-free-solid/faAngleLeft';
-import faAngleRight from '@fortawesome/fontawesome-free-solid/faAngleRight';
 import faPlusCircle from '@fortawesome/fontawesome-free-solid/faPlusCircle';
 
 // Components
