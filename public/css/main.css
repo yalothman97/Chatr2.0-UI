@@ -84,7 +84,7 @@ body.fixed-nav {
 }
 
 .overlay {
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.6);
     position:absolute;
     width: 100%;
     height: 100%;
@@ -99,13 +99,25 @@ body.fixed-nav {
 }
 
 .message-list {
-  min-height: calc(100vh - 56px - 56px - 130px);
+  min-height: calc(100vh - 56px - 56px);
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%), url("https://picsum.photos/1280/720/?random");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  margin-bottom: 130px;
+  padding-bottom: 130px;
+}
+
+.message-list .card {
+  background-color: transparent;
+  color: rgba(255,255,255, 0.8);
+  border: none;
+  z-index: 99;
+}
+
+.message-list .card-subtitle {
+  color: rgba(255,255,255, 0.6);
+  font-size: 0.75rem;
 }
 
 .message-form {
@@ -114,11 +126,25 @@ body.fixed-nav {
   right: 0;
   z-index: 100;
   width: 100%;
-  background-color: #e9ecef;
 }
 
-textarea {
+.message-form textarea, .message-form textarea:focus {
   resize: none;
+  background-color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255, 0.8);
+}
+
+.message-form textarea:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0,0,0,.25);
+  border-color: rgba(0,0,0,.25);
+}
+
+.message-form textarea::placeholder {
+  color: rgba(255,255,255, 0.8);
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 #mainNav .navbar-collapse {
