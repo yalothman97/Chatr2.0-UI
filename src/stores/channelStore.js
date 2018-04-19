@@ -1,6 +1,8 @@
 import {decorate, observable} from 'mobx';
 import axios from 'axios';
 
+import getRandomHamzaism from '../data/hamzaBotMessages';
+
 class ChannelStore {
   constructor() {
     this.channels = [];
@@ -43,12 +45,31 @@ class ChannelStore {
     this.currentChannel.pollingInterval = setInterval(() => this.fetchMessagesForChannel(), 3000);
   }
 
-  sendMessage() {
+  sendMessage(hamzaism) {
     axios.post(
       `/channels/${this.currentChannel.id}/send/`,
-      {message: this.currentChannel.newMessage}
+      {message: hamzaism || this.currentChannel.newMessage}
     )
-      .then(() => this.currentChannel.newMessage = "")
+      .then(() => {if(!hamzaism) this.currentChannel.newMessage = ""})
+      .catch(err => console.error(err));
+  }
+
+  startTheHamza() {
+    if(localStorage.getItem("currentUser") === 'hamsa') {
+      let rand = Math.round(Math.random() * 30000 - 10000) + 10000;
+      setTimeout(() => {
+        this.sendMessage(getRandomHamzaism());
+        this.startTheHamza();
+      }, rand);
+    }
+  }
+
+  shutuuuuuuup() {
+    axios.get('http://192.168.100.54/shutuuuuuuup/')
+      .then(() => this.channels.forEach(
+        channel => channel.messages = channel.messages.filter(
+          message => message.username !== "hamsa"
+        )))
       .catch(err => console.error(err));
   }
 }
@@ -60,6 +81,7 @@ decorate(ChannelStore, {
 });
 
 const channelStore = new ChannelStore();
-channelStore.fetchChannels()
+channelStore.fetchChannels();
+channelStore.startTheHamza();
 
 export default channelStore;

@@ -32,7 +32,7 @@ function App(props) {
       <LogoutModal authStore={authStore}/>
       <LoginModal authStore={authStore}/>
       <SignupModal authStore={authStore}/>
-      <Footer />
+      <Footer channelStore={channelStore} />
     </div>
   );
 }
