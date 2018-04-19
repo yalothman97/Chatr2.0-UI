@@ -110,6 +110,20 @@ body.fixed-nav {
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+  margin-bottom: 130px;
+}
+
+.message-form {
+  position: fixed;
+  bottom: 56px;
+  right: 0;
+  z-index: 100;
+  width: 100%;
+  background-color: #e9ecef;
+}
+
+textarea {
+  resize: none;
 }
 
 #mainNav .navbar-collapse {
@@ -703,7 +717,7 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
 }
 
 footer.sticky-footer {
-  position: absolute;
+  position: fixed;
   right: 0;
   bottom: 0;
   width: 100%;
@@ -713,7 +727,8 @@ footer.sticky-footer {
 }
 
 @media (min-width: 992px) {
-  footer.sticky-footer {
+  footer.sticky-footer,
+  .message-form {
     width: calc(100% - 250px);
   }
 }

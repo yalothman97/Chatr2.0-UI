@@ -18,7 +18,7 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, loading: false, ...payload };
 
     case FETCH_MESSAGES:
-      return { ...state, loading: false };
+      return { ...state, channels: [...state.channels], loading: false };
 
     default:
       return state;

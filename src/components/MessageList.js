@@ -7,9 +7,10 @@ import { fetchMessages } from "../store/actions";
 
 // Components
 import MessageCard from "./MessageCard";
+import MessageForm from "./MessageForm";
 
 class MessageList extends Component {
-  channel = {};
+  channel = null;
 
   componentDidMount() {
     this.props.fetchMessages(this.findChannel());
@@ -34,9 +35,7 @@ class MessageList extends Component {
   findChannel = () => {
     const { channels } = this.props;
     const { channelName } = this.props.match.params;
-    return (
-      channels.find(channel => channel.name.slugify() === channelName) || {}
-    );
+    return channels.find(channel => channel.name.slugify() === channelName);
   };
 
   getContent = () => {
@@ -52,12 +51,13 @@ class MessageList extends Component {
   };
 
   render() {
-    const { user } = this.props;
+    const { user, loading } = this.props;
     this.channel = this.findChannel();
-    let image_url =
-      this.channel.image_url || "https://picsum.photos/1280/720/?random";
+    let image_url = "https://picsum.photos/1280/720/?random";
 
     if (!user) return <Redirect to="/welcome" />;
+    if (!this.channel && !loading) return <Redirect to="/" />;
+    if (this.channel) image_url = this.channel.image_url || image_url;
 
     return (
       <div
@@ -67,6 +67,7 @@ class MessageList extends Component {
         }}
       >
         {this.getContent()}
+        <MessageForm channel={this.channel} />
         <div
           style={{ float: "left", clear: "both" }}
           ref={el => {

@@ -23,28 +23,38 @@ export const fetchChannels = () => {
 
 let interval = null;
 
-export const fetchMessages = channel => {
-  return dispatch => {
-    if (channel) {
-      dispatch({ type: SET_LOADING });
-      if (interval) clearInterval(interval);
-      interval = setInterval(async () => {
-        try {
-          const timestamp = channel.messages.length
-            ? channel.messages[channel.messages.length - 1].timestamp
-            : "";
-          const res = await instance.get(
-            `/channels/${channel.id}/?latest=${timestamp}`
-          );
-          const messages = res.data;
-          channel.messages.push(...messages);
-          dispatch({
-            type: FETCH_MESSAGES
-          });
-        } catch (error) {
-          console.error(error);
-        }
-      }, 3000);
-    }
-  };
+export const fetchMessages = channel => dispatch => {
+  if (channel) {
+    dispatch({ type: SET_LOADING });
+    if (interval) clearInterval(interval);
+    _fetchMessages(channel, dispatch);
+    interval = setInterval(() => _fetchMessages(channel, dispatch), 3000);
+  }
+};
+
+const _fetchMessages = async (channel, dispatch) => {
+  try {
+    const timestamp = channel.messages.length
+      ? channel.messages[channel.messages.length - 1].timestamp
+      : "";
+    const res = await instance.get(
+      `/channels/${channel.id}/?latest=${timestamp}`
+    );
+    const messages = res.data;
+    channel.messages = channel.messages.concat(messages);
+    dispatch({
+      type: FETCH_MESSAGES
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const sendMessage = async (message, channelID, reset) => {
+  try {
+    await instance.post(`/channels/${channelID}/send/`, message);
+    reset();
+  } catch (error) {
+    console.error(error);
+  }
 };

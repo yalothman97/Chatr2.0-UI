@@ -1,5 +1,5 @@
 export { logout, registerUser, checkForExpiredToken } from "./authentication";
 
-export { fetchChannels, fetchMessages } from "./channels";
+export { fetchChannels, fetchMessages, sendMessage } from "./channels";
 
 export { setErrors } from "./errors";
