@@ -734,7 +734,7 @@ footer.sticky-footer {
 }
 
 @media (min-width: 992px) {
-  body.sidenav-toggled footer.sticky-footer {
+  body.sidenav-toggled footer.sticky-footer, body.sidenav-toggled .message-form {
     width: calc(100% - 55px);
   }
 }
