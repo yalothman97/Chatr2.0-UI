@@ -9,9 +9,9 @@ function MessageForm(props) {
         <form className="col-11 mx-auto">
           <textarea className="form-control"
             rows="4" placeholder="Type your message here"
-            value={channelStore.newMessage}
+            value={channelStore.currentChannel.newMessage}
             onChange={e => {
-              channelStore.newMessage = e.target.value
+              channelStore.currentChannel.newMessage = e.target.value
             }}
             onKeyUp={e => {
               if (!e.shiftKey && e.key === "Enter") {
