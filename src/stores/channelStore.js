@@ -27,7 +27,6 @@ class ChannelStore {
       return axios.get(`/channels/${currentChannel.id}/?latest=${currentChannel.timestamp || ''}`)
         .then(res => res.data)
         .then(messages => {
-          console.log(messages)
           if(messages.length) {
             currentChannel.timestamp = messages[messages.length-1].timestamp;
             currentChannel.messages = currentChannel.messages.slice().concat(messages);
