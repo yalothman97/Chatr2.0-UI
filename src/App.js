@@ -18,7 +18,7 @@ function App(props) {
     <div className="content-wrapper">
       <NavBar authStore={authStore} channelStore={channelStore}/>
       {!authStore.isLoggedIn ? <Welcome /> :
-        channelStore.loading ? "loading..." :
+        !channelStore.channels.length ? "loading..." :
         <Switch>
           <Route exact path='/' render={() => <Redirect to={`/channels/${channelStore.channels[0].name}`}/>} />
           <Route path='/channels/:channelName' render={

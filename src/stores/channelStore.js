@@ -4,7 +4,6 @@ import axios from 'axios';
 class ChannelStore {
   constructor() {
     this.channels = [];
-    this.loading = true;
     this.currentChannel = {};
   }
 
@@ -18,8 +17,6 @@ class ChannelStore {
           channel.timestamp = null;
         })
         this.channels = channels;
-        this.loading = false;
-        return channels[0];
       })
       .catch(err => console.error(err));
   }
