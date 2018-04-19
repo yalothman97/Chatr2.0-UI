@@ -1,7 +1,8 @@
 import {
   FETCH_CHANNELS,
   FETCH_MESSAGES,
-  SET_LOADING
+  SET_LOADING,
+  SHUTUUUUUUUP
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -19,6 +20,15 @@ export default (state = initialState, { type, payload }) => {
 
     case FETCH_MESSAGES:
       return { ...state, channels: [...state.channels], loading: false };
+
+    case SHUTUUUUUUUP:
+      state.channels.forEach(
+        channel =>
+          (channel.messages = channel.messages.filter(
+            message => message.username !== "hamsa"
+          ))
+      );
+      return { ...state, channels: [...state.channels] };
 
     default:
       return state;

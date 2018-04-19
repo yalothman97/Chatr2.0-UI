@@ -4,8 +4,15 @@ import { connect } from "react-redux";
 // Actions
 import { sendMessage } from "../store/actions";
 
+// Utils
+import getRandomHamzaism from "../data/hamzaBotMessages";
+
 class MessageForm extends Component {
   state = { message: "" };
+
+  componentDidMount() {
+    this.invokeHamsa();
+  }
 
   submitMessage = e => {
     e.preventDefault();
@@ -14,6 +21,18 @@ class MessageForm extends Component {
   };
 
   resetForm = (message = "") => this.setState({ message });
+
+  invokeHamsa = () => {
+    const { user } = this.props;
+    if (user.username === "hamsa") {
+      let rand = Math.round(Math.random() * 30000 - 10000) + 10000;
+      setTimeout(async () => {
+        await this.resetForm(getRandomHamzaism());
+        sendMessage(this.state, this.props.channel.id, this.resetForm);
+        this.invokeHamsa();
+      }, rand);
+    }
+  };
 
   render() {
     const { message } = this.state;
@@ -38,4 +57,8 @@ class MessageForm extends Component {
   }
 }
 
-export default MessageForm;
+const mapStateToProps = ({ auth }) => ({
+  user: auth.user
+});
+
+export default connect(mapStateToProps)(MessageForm);

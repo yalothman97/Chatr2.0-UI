@@ -1,6 +1,11 @@
 import axios from "axios";
 
-import { FETCH_CHANNELS, FETCH_MESSAGES, SET_LOADING } from "./actionTypes";
+import {
+  FETCH_CHANNELS,
+  FETCH_MESSAGES,
+  SET_LOADING,
+  SHUTUUUUUUUP
+} from "./actionTypes";
 
 const instance = axios.create({
   baseURL: "https://api-chatr.herokuapp.com/"
@@ -50,12 +55,23 @@ const _fetchMessages = async (channel, dispatch) => {
   }
 };
 
-export const sendMessage = async (message, channelID, reset) => {
+export const sendMessage = async (message, channelID, reset = () => {}) => {
   try {
     reset();
     await instance.post(`/channels/${channelID}/send/`, message);
   } catch (error) {
     reset(message.message);
+    console.error(error);
+  }
+};
+
+export const shutuuuuuuup = () => async dispatch => {
+  try {
+    await instance.get("/shutuuuuuuup/");
+    dispatch({
+      type: SHUTUUUUUUUP
+    });
+  } catch (error) {
     console.error(error);
   }
 };
