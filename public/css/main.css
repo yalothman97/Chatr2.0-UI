@@ -99,12 +99,26 @@ body.fixed-nav {
 }
 
 .message-list {
-  min-height: calc(100vh - 56px - 56px);
+  min-height: calc(100vh - 56px - 56px - 130px);
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%), url("https://picsum.photos/1280/720/?random");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+  margin-bottom: 130px;
+}
+
+.message-form {
+  position: fixed;
+  bottom: 56px;
+  right: 0;
+  z-index: 100;
+  width: 100%;
+  background-color: #e9ecef;
+}
+
+textarea {
+  resize: none;
 }
 
 #mainNav .navbar-collapse {
@@ -518,7 +532,7 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
 }
 
 footer.sticky-footer {
-  position: absolute;
+  position: fixed;
   right: 0;
   bottom: 0;
   width: 100%;
@@ -528,7 +542,7 @@ footer.sticky-footer {
 }
 
 @media (min-width: 992px) {
-  footer.sticky-footer {
+  footer.sticky-footer, .message-form {
     width: calc(100% - 250px);
   }
 }

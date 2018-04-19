@@ -6,6 +6,7 @@ class ChannelStore {
     this.channels = [];
     this.loading = true;
     this.currentChannel = {};
+    this.newMessage = "";
   }
 
   fetchChannels() {
@@ -21,7 +22,6 @@ class ChannelStore {
   }
 
   fetchMessagesForChannel() {
-    console.log(axios.defaults)
     if (this.currentChannel) {
       return axios.get(`/channels/${this.currentChannel.id}/`)
         .then(res => res.data)
@@ -31,14 +31,23 @@ class ChannelStore {
   }
 
   setCurrentChannel(channelName) {
+    this.newMessage = "";
     this.currentChannel = this.channels.find(channel => channel.name === channelName);
     this.fetchMessagesForChannel();
+  }
+
+  sendMessage() {
+    console.log("hello")
+    axios.post(`/channels/${this.currentChannel.id}/send/`, {message: this.newMessage})
+      .then(() => this.newMessage = "")
+      .catch(err => console.error(err));
   }
 }
 
 decorate(ChannelStore, {
   channels: observable,
   loading: observable,
+  newMessage: observable,
   currentChannel: observable
 });
 

@@ -3,6 +3,7 @@ import {observer} from 'mobx-react';
 
 // Components
 import MessageCard from './MessageCard';
+import MessageForm from './MessageForm';
 
 class MessageList extends Component {
   scrollToBottom = () => {
@@ -25,8 +26,8 @@ class MessageList extends Component {
     return (
       <div className="container-fluid message-list py-3">
         {messageCards}
-        <div style={{ float:"left", clear: "both" }} ref={(el) => { this.messagesEnd = el; }}>
-        </div>
+        <MessageForm channelStore={channelStore}/>
+        <div style={{ float:"left", clear: "both" }} ref={(el) => { this.messagesEnd = el; }}></div>
       </div>
     );
   }
