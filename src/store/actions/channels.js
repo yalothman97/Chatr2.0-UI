@@ -52,9 +52,10 @@ const _fetchMessages = async (channel, dispatch) => {
 
 export const sendMessage = async (message, channelID, reset) => {
   try {
-    await instance.post(`/channels/${channelID}/send/`, message);
     reset();
+    await instance.post(`/channels/${channelID}/send/`, message);
   } catch (error) {
+    reset(message.message);
     console.error(error);
   }
 };

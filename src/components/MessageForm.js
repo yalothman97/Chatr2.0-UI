@@ -10,17 +10,17 @@ class MessageForm extends Component {
   submitMessage = e => {
     e.preventDefault();
     if (this.state.message)
-      sendMessage(this.state, this.props.channel.id, () =>
-        this.setState({ message: "" })
-      );
+      sendMessage(this.state, this.props.channel.id, this.resetForm);
   };
+
+  resetForm = (message = "") => this.setState({ message });
 
   render() {
     const { message } = this.state;
     return (
       <div className="message-form float-right py-3">
         <div className="container-fluid">
-          <form className="col-11 mx-auto">
+          <form className="col-11 mx-auto" onSubmit={this.submitMessage}>
             <textarea
               className="form-control"
               rows="4"

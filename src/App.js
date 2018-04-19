@@ -18,7 +18,6 @@ class App extends Component {
   }
 
   render() {
-    // if(loading)
     return (
       <div className="content-wrapper">
         <NavBar />
