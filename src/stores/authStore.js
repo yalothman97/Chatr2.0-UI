@@ -55,7 +55,6 @@ class AuthStore {
   }
 
   resetForm() {
-    console.log("here");
     this.error = [];
     this.username = "";
     this.password = "";

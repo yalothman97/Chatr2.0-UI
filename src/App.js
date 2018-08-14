@@ -2,9 +2,7 @@ import React, { Component } from "react";
 
 // Components
 import NavBar from "./components/Navigation/NavBar";
-import LogoutModal from "./components/Authentication/LogoutModal";
-import LoginModal from "./components/Authentication/LoginModal";
-import SignupModal from "./components/Authentication/SignupModal";
+import AuthModals from "./components/Modals/AuthModals";
 import Footer from "./components/Footer";
 
 class App extends Component {
@@ -12,9 +10,7 @@ class App extends Component {
     return (
       <div className="content-wrapper">
         <NavBar />
-        <LogoutModal />
-        <LoginModal />
-        <SignupModal />
+        <AuthModals />
         <Footer />
       </div>
     );
