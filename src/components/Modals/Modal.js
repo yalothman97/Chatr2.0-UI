@@ -10,7 +10,9 @@ class Modal extends Component {
     const response = authStore[type]();
 
     if (response) {
-      response.then(() => !authStore.error.length && thisModal.modal("toggle"));
+      response.then(
+        () => !authStore.errors.length && thisModal.modal("toggle")
+      );
     } else {
       thisModal.modal("toggle");
     }

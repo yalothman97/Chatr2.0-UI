@@ -6,12 +6,13 @@ import authStore from "../../stores/authStore";
 
 class RegistationForm extends Component {
   render() {
+    console.log(authStore.errors);
     return (
       <div>
         <form>
-          {authStore.error.length > 0 && (
+          {authStore.errors.length > 0 && (
             <div className="alert alert-danger" role="alert">
-              {authStore.error}
+              {authStore.errors}
             </div>
           )}
           <div className="form-group">
@@ -22,7 +23,7 @@ class RegistationForm extends Component {
               required
               onChange={e => {
                 authStore.username = e.target.value;
-                authStore.error = [];
+                authStore.errors = [];
               }}
             />
           </div>
@@ -34,7 +35,7 @@ class RegistationForm extends Component {
               required
               onChange={e => {
                 authStore.password = e.target.value;
-                authStore.error = [];
+                authStore.errors = [];
               }}
             />
           </div>
@@ -45,7 +46,7 @@ class RegistationForm extends Component {
             data-dismiss="modal"
             data-toggle="modal"
             data-target={this.props.target}
-            onClick={() => (authStore.error = [])}
+            onClick={() => (authStore.errors = [])}
           >
             {this.props.alternateLinkText}
           </button>

@@ -9,13 +9,13 @@ const AuthModals = () => {
     <div>
       <Modal key="signup" title="Register an account" type="signup">
         <RegistrationForm
-          target="#signupModal"
+          target="#loginModal"
           alternateLinkText="login with an existing account"
         />
       </Modal>
       <Modal key="login" title="Login to send messages" type="login">
         <RegistrationForm
-          target="#loginModal"
+          target="#signupModal"
           alternateLinkText="register an account"
         />
       </Modal>
