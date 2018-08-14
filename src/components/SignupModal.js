@@ -1,30 +1,35 @@
-import React from 'react';
-import {observer} from 'mobx-react';
+import React from "react";
+import { observer } from "mobx-react";
 
 // Components
-import Modal from './Modal';
-import RegistationForm from './RegistrationForm';
+import Modal from "./Modal";
+import RegistationForm from "./RegistrationForm";
 
 function SignupModal(props) {
   const authStore = props.authStore;
-  const body = <RegistationForm target="#loginModal"
-                  alternateLinkText="login with an existing account"
-                  authStore={authStore} />;
+  const body = (
+    <RegistationForm
+      target="#loginModal"
+      alternateLinkText="login with an existing account"
+      authStore={authStore}
+    />
+  );
 
   const signup = () => {
-    const thisModal = window.$('#signupModal')
-    authStore.signup()
-      .then(() => !authStore.error.length && thisModal.modal('toggle'));
+    const thisModal = window.$("#signupModal");
+    authStore
+      .signup()
+      .then(() => !authStore.error.length && thisModal.modal("toggle"));
   };
 
   const modalProps = {
-    id: 'signupModal',
-    title: 'Register an account',
+    id: "signupModal",
+    title: "Register an account",
     body: body,
     clickHandler: signup,
     authStore: authStore,
-    type: 'Signup'
-  }
+    type: "Signup"
+  };
   return <Modal {...modalProps} />;
 }
 
