@@ -9,8 +9,10 @@ import {
   faUserPlus
 } from "@fortawesome/free-solid-svg-icons";
 
+// Stores
+import authStore from "../../stores/authStore";
+
 function AuthButton(props) {
-  const authStore = props.authStore;
   let buttons;
 
   if (authStore.isLoggedIn) {
@@ -36,7 +38,12 @@ function AuthButton(props) {
     ];
   }
 
-  return <ul className="navbar-nav ml-auto">{buttons}</ul>;
+  return (
+    <ul className="navbar-nav ml-auto">
+      <span className="navbar-text">{authStore.currentUser}</span>
+      {buttons}
+    </ul>
+  );
 }
 
 export default observer(AuthButton);

@@ -1,8 +1,10 @@
 import React from "react";
 import { observer } from "mobx-react";
 
+// Stores
+import authStore from "../../stores/authStore";
+
 function RegistationForm(props) {
-  const authStore = props.authStore;
   return (
     <div>
       <form>
@@ -16,7 +18,6 @@ function RegistationForm(props) {
             className="form-control"
             type="text"
             placeholder="Username"
-            value={authStore.username}
             required
             onChange={e => {
               authStore.username = e.target.value;
@@ -29,7 +30,6 @@ function RegistationForm(props) {
             className="form-control"
             type="password"
             placeholder="Password"
-            value={authStore.password}
             required
             onChange={e => {
               authStore.password = e.target.value;

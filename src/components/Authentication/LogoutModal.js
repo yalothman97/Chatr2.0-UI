@@ -3,8 +3,10 @@ import React from "react";
 // Components
 import Modal from "./Modal";
 
+// Stores
+import authStore from "../../stores/authStore";
+
 function LogoutModal(props) {
-  const authStore = props.authStore;
   const modalProps = {
     id: "logoutModal",
     title: "Ready to Leave?",

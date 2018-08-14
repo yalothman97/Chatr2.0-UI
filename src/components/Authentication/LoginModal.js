@@ -5,8 +5,10 @@ import { observer } from "mobx-react";
 import Modal from "./Modal";
 import RegistationForm from "./RegistrationForm";
 
+// Stores
+import authStore from "../../stores/authStore";
+
 function LoginModal(props) {
-  const authStore = props.authStore;
   const body = (
     <RegistationForm
       target="#signupModal"

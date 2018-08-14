@@ -28,13 +28,10 @@ function NavBar(props) {
       </button>
       <div className="collapse navbar-collapse" id="navbarResponsive">
         <SideNav />
-        <ul className="navbar-nav ml-auto">
-          <span className="navbar-text">{props.authStore.currentUser}</span>
-          <AuthButton authStore={props.authStore} />
-        </ul>
+        <AuthButton />
       </div>
     </nav>
   );
 }
 
-export default observer(NavBar);
+export default NavBar;

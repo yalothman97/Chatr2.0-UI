@@ -1,5 +1,8 @@
 import React from "react";
 
+// Stores
+import authStore from "../../stores/authStore";
+
 function Modal(props) {
   return (
     <div
@@ -21,7 +24,7 @@ function Modal(props) {
               className="btn btn-secondary"
               type="button"
               data-dismiss="modal"
-              onClick={() => props.authStore && props.authStore.resetForm()}
+              onClick={() => authStore && authStore.resetForm()}
             >
               Cancel
             </button>
