@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 
 // Components
 import NavBar from "./components/Navigation/NavBar";
@@ -7,16 +7,18 @@ import LoginModal from "./components/Authentication/LoginModal";
 import SignupModal from "./components/Authentication/SignupModal";
 import Footer from "./components/Footer";
 
-function App(props) {
-  return (
-    <div className="content-wrapper">
-      <NavBar />
-      <LogoutModal />
-      <LoginModal />
-      <SignupModal />
-      <Footer />
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <div className="content-wrapper">
+        <NavBar />
+        <LogoutModal />
+        <LoginModal />
+        <SignupModal />
+        <Footer />
+      </div>
+    );
+  }
 }
 
 export default App;
