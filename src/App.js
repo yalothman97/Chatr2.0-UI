@@ -1,10 +1,10 @@
 import React from "react";
 
 // Components
-import NavBar from "./components/NavBar";
-import LogoutModal from "./components/LogoutModal";
-import LoginModal from "./components/LoginModal";
-import SignupModal from "./components/SignupModal";
+import NavBar from "./components/Navigation/NavBar";
+import LogoutModal from "./components/Authentication/LogoutModal";
+import LoginModal from "./components/Authentication/LoginModal";
+import SignupModal from "./components/Authentication/SignupModal";
 import Footer from "./components/Footer";
 
 function App(props) {

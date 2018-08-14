@@ -11,28 +11,32 @@ import {
 
 function AuthButton(props) {
   const authStore = props.authStore;
-  return authStore.isLoggedIn ? (
-    <ul className="navbar-nav ml-auto">
+  let buttons;
+
+  if (authStore.isLoggedIn) {
+    buttons = (
       <li className="nav-item">
         <a className="nav-link" data-toggle="modal" data-target="#logoutModal">
           <FontAwesomeIcon icon={faSignOutAlt} /> Logout
         </a>
       </li>
-    </ul>
-  ) : (
-    <ul className="navbar-nav ml-auto">
-      <li className="nav-item">
+    );
+  } else {
+    buttons = [
+      <li key="loginButton" className="nav-item">
         <a className="nav-link" data-toggle="modal" data-target="#loginModal">
           <FontAwesomeIcon icon={faSignInAlt} /> Login
         </a>
-      </li>
-      <li>
+      </li>,
+      <li key="signupButton" className="nav-item">
         <a className="nav-link" data-toggle="modal" data-target="#signupModal">
           <FontAwesomeIcon icon={faUserPlus} /> Signup
         </a>
       </li>
-    </ul>
-  );
+    ];
+  }
+
+  return <ul className="navbar-nav ml-auto">{buttons}</ul>;
 }
 
 export default observer(AuthButton);
