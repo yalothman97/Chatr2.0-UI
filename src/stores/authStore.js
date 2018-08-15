@@ -16,6 +16,7 @@ class AuthStore {
     this.errors = [];
     this.username = "";
     this.password = "";
+    setAuthToken();
   }
 
   signup() {
