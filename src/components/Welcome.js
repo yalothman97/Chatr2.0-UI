@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class Welcome extends Component {
   render() {
@@ -9,13 +10,9 @@ class Welcome extends Component {
           <h3 className="mb-5">
             <em>You're gonna need to login to see the messages</em>
           </h3>
-          <button
-            className="btn btn-primary btn-lg"
-            data-toggle="modal"
-            data-target="#loginModal"
-          >
+          <Link to="/login" className="btn btn-primary btn-lg">
             Login
-          </button>
+          </Link>
         </div>
         <div className="overlay z-0" />
       </header>

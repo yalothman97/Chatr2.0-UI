@@ -11,15 +11,16 @@ import {
 
 class AuthButton extends Component {
   render() {
-    const { user } = this.props;
+    // const { user } = this.props;
+    const user = "Mr Potato";
     let buttons;
 
     if (user) {
       buttons = (
         <li className="nav-item">
-          <a className="nav-link">
+          <span className="nav-link">
             <FontAwesomeIcon icon={faSignOutAlt} /> Logout
-          </a>
+          </span>
         </li>
       );
     } else {

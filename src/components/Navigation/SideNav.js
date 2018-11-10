@@ -35,7 +35,7 @@ class SideNav extends React.Component {
         </ul>
         <ul className="navbar-nav sidenav-toggler">
           <li className="nav-item">
-            <a
+            <span
               className="nav-link text-center"
               id="sidenavToggler"
               onClick={() =>
@@ -47,7 +47,7 @@ class SideNav extends React.Component {
               <FontAwesomeIcon
                 icon={this.state.collapsed ? faAngleRight : faAngleLeft}
               />
-            </a>
+            </span>
           </li>
         </ul>
       </div>
