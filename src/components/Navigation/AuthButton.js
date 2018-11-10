@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { observer } from "mobx-react";
+import { Link } from "react-router-dom";
 
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,21 +9,15 @@ import {
   faUserPlus
 } from "@fortawesome/free-solid-svg-icons";
 
-// Stores
-import authStore from "../../stores/authStore";
-
 class AuthButton extends Component {
   render() {
+    const { user } = this.props;
     let buttons;
 
-    if (authStore.isLoggedIn) {
+    if (user) {
       buttons = (
         <li className="nav-item">
-          <a
-            className="nav-link"
-            data-toggle="modal"
-            data-target="#logoutModal"
-          >
+          <a className="nav-link">
             <FontAwesomeIcon icon={faSignOutAlt} /> Logout
           </a>
         </li>
@@ -31,29 +25,25 @@ class AuthButton extends Component {
     } else {
       buttons = [
         <li key="loginButton" className="nav-item">
-          <a className="nav-link" data-toggle="modal" data-target="#loginModal">
+          <Link to="/login" className="nav-link">
             <FontAwesomeIcon icon={faSignInAlt} /> Login
-          </a>
+          </Link>
         </li>,
         <li key="signupButton" className="nav-item">
-          <a
-            className="nav-link"
-            data-toggle="modal"
-            data-target="#signupModal"
-          >
+          <Link to="/signup" className="nav-link">
             <FontAwesomeIcon icon={faUserPlus} /> Signup
-          </a>
+          </Link>
         </li>
       ];
     }
 
     return (
       <ul className="navbar-nav ml-auto">
-        <span className="navbar-text">{authStore.currentUser}</span>
+        <span className="navbar-text">{user}</span>
         {buttons}
       </ul>
     );
   }
 }
 
-export default observer(AuthButton);
+export default AuthButton;
