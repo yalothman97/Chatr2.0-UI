@@ -11,8 +11,7 @@ import {
 
 class AuthButton extends Component {
   render() {
-    // const { user } = this.props;
-    const user = "Mr Potato";
+    const { user } = this.props;
     let buttons;
 
     if (user) {
@@ -40,7 +39,7 @@ class AuthButton extends Component {
 
     return (
       <ul className="navbar-nav ml-auto">
-        <span className="navbar-text">{user}</span>
+        {/* <span className="navbar-text">{user.username}</span> */}
         {buttons}
       </ul>
     );
