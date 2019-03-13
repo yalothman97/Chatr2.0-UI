@@ -2,25 +2,19 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 class RegistationForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: "",
-      password: ""
-    };
+  state = {
+    username: "",
+    password: ""
+  };
 
-    this.changeHandler = this.changeHandler.bind(this);
-    this.submitHandler = this.submitHandler.bind(this);
-  }
-
-  changeHandler(e) {
+  changeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
-  }
+  };
 
-  submitHandler(e) {
+  submitHandler = e => {
     e.preventDefault();
     alert("I don't work yet");
-  }
+  };
 
   render() {
     const type = this.props.match.url.substring(1);
@@ -32,19 +26,13 @@ class RegistationForm extends Component {
               ? "Login to send messages"
               : "Register an account"}
           </h5>
-          <form onSubmit={this.submitHandler} noValidate>
-            {/* {authStore.errors.length > 0 && (
-            <div className="alert alert-danger" role="alert">
-              {authStore.errors}
-            </div>
-          )} */}
+          <form onSubmit={this.submitHandler}>
             <div className="form-group">
               <input
                 className="form-control"
                 type="text"
                 placeholder="Username"
                 name="username"
-                required
                 onChange={this.changeHandler}
               />
             </div>
@@ -54,7 +42,6 @@ class RegistationForm extends Component {
                 type="password"
                 placeholder="Password"
                 name="password"
-                required
                 onChange={this.changeHandler}
               />
             </div>
@@ -69,7 +56,6 @@ class RegistationForm extends Component {
           <Link
             to={type === "login" ? "/signup" : "/login"}
             className="btn btn-small btn-link"
-            // onClick={() => (authStore.errors = [])}
           >
             {type === "login"
               ? "register an account"

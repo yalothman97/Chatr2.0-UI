@@ -13,10 +13,7 @@ import {
 import ChannelNavLink from "./ChannelNavLink";
 
 class SideNav extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { collapsed: false };
-  }
+  state = { collapsed: false };
 
   render() {
     const channelLinks = [{ name: "all" }].map(channel => (
