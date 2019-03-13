@@ -13,17 +13,15 @@ class AuthButton extends Component {
   render() {
     // const { user } = this.props;
     const user = "Mr Potato";
-    let buttons;
+    let buttons = (
+      <li className="nav-item">
+        <span className="nav-link">
+          <FontAwesomeIcon icon={faSignOutAlt} /> Logout
+        </span>
+      </li>
+    );
 
-    if (user) {
-      buttons = (
-        <li className="nav-item">
-          <span className="nav-link">
-            <FontAwesomeIcon icon={faSignOutAlt} /> Logout
-          </span>
-        </li>
-      );
-    } else {
+    if (!user) {
       buttons = [
         <li key="loginButton" className="nav-item">
           <Link to="/login" className="nav-link">
