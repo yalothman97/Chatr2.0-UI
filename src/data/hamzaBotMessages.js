@@ -22,7 +22,6 @@ const hamzaisms = [
   "My favorite person is Darth Tyrion"
 ];
 
-
 export default function getRandomMessage() {
   return hamzaisms[Math.floor(Math.random() * hamzaisms.length)];
 }
