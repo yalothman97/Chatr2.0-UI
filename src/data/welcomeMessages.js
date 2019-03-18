@@ -22,6 +22,6 @@ const welcomeMessages = [
   "چیٹ میں خوش آمدید"
 ];
 
-export default function getRandomMessage(){
-  return welcomeMessages[Math.floor(Math.random()*welcomeMessages.length)];
+export default function getRandomMessage() {
+  return welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)];
 }

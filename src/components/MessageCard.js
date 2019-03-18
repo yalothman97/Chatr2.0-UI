@@ -17,7 +17,7 @@ function MessageCard(props) {
         >
           {username}
         </h5>
-        <h6 className="card-subtitle mb-3 text-muted">
+        <h6 className="card-subtitle mb-3">
           {date.toLocaleDateString("en-GB", {
             weekday: "long",
             year: "numeric",
