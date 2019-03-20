@@ -13,7 +13,7 @@ function MessageCard(props) {
       <div className="card-body">
         <h5
           className="card-title"
-          onClick={username === "hamsa" && props.shutuuuuuuup}
+          onClick={username === "hamsa" ? props.shutuuuuuuup : () => {}}
         >
           {username}
         </h5>

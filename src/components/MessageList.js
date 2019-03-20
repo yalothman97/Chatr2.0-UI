@@ -68,6 +68,7 @@ class MessageList extends Component {
       >
         {this.getContent()}
         <MessageForm channel={this.channel} />
+        <div className="overlay" />
         <div
           style={{ height: "130px" }}
           ref={el => {
