@@ -25,7 +25,6 @@ class MessageList extends Component {
     ) {
       this.fetchMessages();
     }
-    this.scrollToBottom();
   }
 
   componentWillUnmount() {
@@ -37,17 +36,18 @@ class MessageList extends Component {
       this.messagesEnd.scrollIntoView({ behavior: behavior });
   };
 
-  fetchMessages = () => {
+  fetchMessages = async () => {
     const { channel } = this;
     if (channel) {
       this.props.setLoading();
-      this.props.fetchMessages(channel);
+      await this.props.fetchMessages(channel);
+      this.scrollToBottom("auto");
       if (this.interval) clearInterval(this.interval);
       else {
-        this.interval = setInterval(
-          () => this.props.fetchMessages(channel),
-          3000
-        );
+        this.interval = setInterval(async () => {
+          await this.props.fetchMessages(channel);
+          this.scrollToBottom();
+        }, 3000);
       }
     }
   };
