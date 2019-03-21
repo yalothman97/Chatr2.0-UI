@@ -10,8 +10,14 @@ import getRandomHamzaism from "../data/hamzaBotMessages";
 class MessageForm extends Component {
   state = { message: "" };
 
+  timer = null;
+
   componentDidMount() {
     this.invokeHamsa();
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timer);
   }
 
   submitMessage = e => {
@@ -26,7 +32,7 @@ class MessageForm extends Component {
     const { user } = this.props;
     if (user.username === "hamsa") {
       let rand = Math.round(Math.random() * 30000 - 10000) + 10000;
-      setTimeout(async () => {
+      this.timer = setTimeout(async () => {
         await this.resetForm(getRandomHamzaism());
         sendMessage(this.state, this.props.channel.id, this.resetForm);
         this.invokeHamsa();

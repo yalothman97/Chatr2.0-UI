@@ -43,12 +43,10 @@ class MessageList extends Component {
       await this.props.fetchMessages(channel);
       this.scrollToBottom("auto");
       if (this.interval) clearInterval(this.interval);
-      else {
-        this.interval = setInterval(async () => {
-          await this.props.fetchMessages(channel);
-          this.scrollToBottom();
-        }, 3000);
-      }
+      this.interval = setInterval(async () => {
+        await this.props.fetchMessages(channel);
+        this.scrollToBottom();
+      }, 3000);
     }
   };
 
