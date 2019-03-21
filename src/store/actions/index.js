@@ -1,6 +1,7 @@
 export { logout, registerUser, checkForExpiredToken } from "./authentication";
 
 export {
+  setLoading,
   fetchChannels,
   fetchMessages,
   sendMessage,

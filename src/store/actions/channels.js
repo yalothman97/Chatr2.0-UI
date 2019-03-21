@@ -3,13 +3,15 @@ import axios from "axios";
 import {
   FETCH_CHANNELS,
   FETCH_MESSAGES,
-  SET_LOADING,
-  SHUTUUUUUUUP
+  SHUTUUUUUUUP,
+  SET_LOADING
 } from "./actionTypes";
 
 const instance = axios.create({
   baseURL: "https://api-chatr.herokuapp.com/"
 });
+
+export const setLoading = () => ({ type: SET_LOADING });
 
 export const fetchChannels = () => {
   return async dispatch => {
@@ -26,30 +28,29 @@ export const fetchChannels = () => {
   };
 };
 
-let interval = null;
+export const fetchMessages = channel => async dispatch => {
+  const timestamp = channel.messages.length
+    ? channel.messages[channel.messages.length - 1].timestamp
+    : "";
 
-export const fetchMessages = channel => dispatch => {
-  if (channel) {
-    dispatch({ type: SET_LOADING });
-    if (interval) clearInterval(interval);
-    _fetchMessages(channel, dispatch);
-    interval = setInterval(() => _fetchMessages(channel, dispatch), 3000);
-  }
-};
-
-const _fetchMessages = async (channel, dispatch) => {
   try {
-    const timestamp = channel.messages.length
-      ? channel.messages[channel.messages.length - 1].timestamp
-      : "";
     const res = await instance.get(
       `/channels/${channel.id}/?latest=${timestamp}`
     );
     const messages = res.data;
-    channel.messages = channel.messages.concat(messages);
-    dispatch({
-      type: FETCH_MESSAGES
-    });
+    if (
+      !messages.some(
+        newMessage =>
+          !!channel.messages.find(
+            originalMessage => newMessage.id === originalMessage.id
+          )
+      )
+    ) {
+      channel.messages = channel.messages.concat(messages);
+      dispatch({
+        type: FETCH_MESSAGES
+      });
+    }
   } catch (error) {
     console.error(error);
   }
@@ -62,6 +63,7 @@ export const sendMessage = async (message, channelID, reset = () => {}) => {
   } catch (error) {
     reset(message.message);
     console.error(error);
+    if (error.response) console.error(error.response.data);
   }
 };
 
