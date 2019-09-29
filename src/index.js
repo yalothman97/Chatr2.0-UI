@@ -13,7 +13,7 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import App from "./App";
 
 // Store
-import store from "./store";
+import store from "./redux";
 
 ReactDOM.render(
   <Provider store={store}>

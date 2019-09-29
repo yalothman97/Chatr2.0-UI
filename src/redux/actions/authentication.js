@@ -1,15 +1,13 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
-import * as actionTypes from "./actionTypes";
+import {} from "./actionTypes";
 
 import { setErrors } from "./errors";
 
 const instance = axios.create({
   baseURL: "https://api-chatr.herokuapp.com/"
 });
-
-const setAuthToken = token => {};
 
 export const checkForExpiredToken = () => {};
 
@@ -19,7 +17,4 @@ export const signup = userData => {};
 
 export const logout = () => {};
 
-const setCurrentUser = user => ({
-  type: actionTypes.SET_CURRENT_USER,
-  payload: user
-});
+const setCurrentUser = token => {};
