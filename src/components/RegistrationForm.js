@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { authorization } from "../redux/actions/authentication";
+import { setErrors } from "../redux/actions/errors";
 
 class RegistationForm extends Component {
   state = {
@@ -7,17 +10,23 @@ class RegistationForm extends Component {
     password: ""
   };
 
+  componentWillUnmount() {
+    if (this.props.errors.length) this.props.setErrors();
+  }
+
   changeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  submitHandler = e => {
+  submitHandler = (e, type) => {
     e.preventDefault();
-    alert("I don't work yet");
+    this.props.authorization(this.state, type, this.props.history);
   };
 
   render() {
     const type = this.props.match.url.substring(1);
+    const errors = this.props.errors;
+
     return (
       <div className="card col-6 mx-auto p-0 mt-5">
         <div className="card-body">
@@ -26,7 +35,14 @@ class RegistationForm extends Component {
               ? "Login to send messages"
               : "Register an account"}
           </h5>
-          <form onSubmit={this.submitHandler}>
+          <form onSubmit={event => this.submitHandler(event, type)}>
+            {!!errors.length && (
+              <div className="alert alert-danger" role="alert">
+                {errors.map(error => (
+                  <p key={error}>{error}</p>
+                ))}
+              </div>
+            )}
             <div className="form-group">
               <input
                 className="form-control"
@@ -67,4 +83,21 @@ class RegistationForm extends Component {
   }
 }
 
-export default RegistationForm;
+const mapStateToProps = state => {
+  return {
+    errors: state.errors.errors
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    authorization: (userData, type, history) =>
+      dispatch(authorization(userData, type, history)),
+    setErrors: () => dispatch(setErrors())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RegistationForm);
