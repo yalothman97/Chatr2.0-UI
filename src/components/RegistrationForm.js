@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { authorization } from "../redux/actions/authentication";
-import { setErrors } from "../redux/actions/errors";
+import { authorization, setErrors } from "../redux/actions";
 
 class RegistationForm extends Component {
   state = {

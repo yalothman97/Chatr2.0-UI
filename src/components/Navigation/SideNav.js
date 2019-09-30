@@ -11,12 +11,13 @@ import {
 
 // Components
 import ChannelNavLink from "./ChannelNavLink";
+import { connect } from "react-redux";
 
 class SideNav extends React.Component {
   state = { collapsed: false };
 
   render() {
-    const channelLinks = [{ name: "all" }].map(channel => (
+    const channelLinks = this.props.channels.map(channel => (
       <ChannelNavLink key={channel.name} channel={channel} />
     ));
     return (
@@ -52,4 +53,10 @@ class SideNav extends React.Component {
   }
 }
 
-export default SideNav;
+const mapStateToProps = state => {
+  return {
+    channels: state.channels.channels
+  };
+};
+
+export default connect(mapStateToProps)(SideNav);
