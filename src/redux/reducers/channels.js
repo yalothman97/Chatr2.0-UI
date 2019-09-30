@@ -24,11 +24,11 @@ const reducer = (state = initialState, action) => {
         loading: false
       };
 
-    // case ADD_AUTHOR:
-    //   const newAuthor = action.payload;
+    // case ADD_CHANNEL:
+    //   const newChannel = action.payload;
     //   return {
     //     ...state,
-    //     authors: [newAuthor, ...state.authors]
+    //     authors: [newChannel, ...state.authors]
     //   };
 
     default:

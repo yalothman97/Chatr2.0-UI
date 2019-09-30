@@ -6,13 +6,21 @@ import { fetchChannelMsgs } from "../redux/actions";
 
 class ChannelMsgs extends Component {
   // { channelNAME } = match.params;
-  componentDidUpdate() {
+  componentDidMount() {
     this.props.fetchChannelMsgs(this.props.match.params.channelID);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.match.params.channelID !== this.props.match.params.channelID
+    ) {
+      this.props.fetchChannelMsgs(this.props.match.params.channelID);
+    }
   }
 
   render() {
     let messages = this.props.msgs.map(message => (
-      <div>
+      <div key={message.id}>
         <h5>{message.username}</h5>
         <h2>message: {message.message}</h2>
         <small>time: {message.timestamp}</small>

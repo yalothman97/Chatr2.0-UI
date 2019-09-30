@@ -3,3 +3,5 @@ export const SET_ERRORS = "SET_ERRORS";
 
 export const FETCH_CHANNELS = "FETCH_CHANNELS";
 export const FETCH_CHANNEL_MSGS = "FETCH_CHANNELS_MSGS";
+
+export const ADD_CHANNEL = "ADD_CHANNEL";

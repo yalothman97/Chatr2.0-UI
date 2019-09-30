@@ -5,25 +5,29 @@ import { SET_CURRENT_USER, SET_ERRORS } from "./actionTypes";
 
 import { setErrors } from "./errors";
 
+import { fetchChannels } from "./channels";
+
 // const instance = axios.create({
 //   baseURL: "https://api-chatr.herokuapp.com/"
 // });
 
 const setCurrentUser = token => {
-  let user = null;
-  if (token) {
-    localStorage.setItem("token", token);
-    axios.defaults.headers.common.Authorization = `jwt ${token}`;
-    user = jwt_decode(token);
-  } else {
-    localStorage.removeItem("token");
-    delete axios.defaults.headers.common.Authorization;
-    user = null;
-  }
-
-  return {
-    type: SET_CURRENT_USER,
-    payload: user
+  return dispatch => {
+    let user = null;
+    if (token) {
+      localStorage.setItem("token", token);
+      axios.defaults.headers.common.Authorization = `jwt ${token}`;
+      user = jwt_decode(token);
+      dispatch(fetchChannels());
+    } else {
+      localStorage.removeItem("token");
+      delete axios.defaults.headers.common.Authorization;
+      user = null;
+    }
+    dispatch({
+      type: SET_CURRENT_USER,
+      payload: user
+    });
   };
 };
 

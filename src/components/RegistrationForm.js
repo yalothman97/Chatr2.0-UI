@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { authorization, setErrors } from "../redux/actions";
 
@@ -25,6 +25,7 @@ class RegistationForm extends Component {
   render() {
     const type = this.props.match.url.substring(1);
     const errors = this.props.errors;
+    if (this.props.user) return <Redirect to="/private" />;
 
     return (
       <div className="card col-6 mx-auto p-0 mt-5">
@@ -84,7 +85,8 @@ class RegistationForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    errors: state.errors.errors
+    errors: state.errors.errors,
+    user: state.user
   };
 };
 
