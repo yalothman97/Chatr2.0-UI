@@ -5,3 +5,4 @@ export const FETCH_CHANNELS = "FETCH_CHANNELS";
 export const FETCH_CHANNEL_MSGS = "FETCH_CHANNELS_MSGS";
 
 export const ADD_CHANNEL = "ADD_CHANNEL";
+export const POST_MSG = "POST_MSG";

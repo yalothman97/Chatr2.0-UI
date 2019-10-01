@@ -22,3 +22,5 @@ const ChannelNavLink = ({ channel }) => {
 };
 
 export default ChannelNavLink;
+
+// Hatha il channel names

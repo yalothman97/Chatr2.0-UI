@@ -12,6 +12,7 @@ import {
 // Components
 import ChannelNavLink from "./ChannelNavLink";
 import { connect } from "react-redux";
+import AddChannelForm from "../AddChannelForm";
 
 class SideNav extends React.Component {
   state = { collapsed: false };
@@ -24,10 +25,24 @@ class SideNav extends React.Component {
       <div>
         <ul className="navbar-nav navbar-sidenav" id="exampleAccordion">
           <li className="nav-item" data-toggle="tooltip" data-placement="right">
-            <Link className="nav-link heading" to="/createChannel">
-              <span className="nav-link-text mr-2">Channels</span>
-              <FontAwesomeIcon icon={faPlusCircle} />
-            </Link>
+            <p className="nav-link heading">
+              <a
+                className="nav-link-text mr-2"
+                data-toggle="collapse"
+                href="#collapseExample"
+                role="button"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+              >
+                Channels
+                <FontAwesomeIcon icon={faPlusCircle} />
+              </a>
+            </p>
+            <div className="collapse" id="collapseExample">
+              <div className="card card-body">
+                <AddChannelForm />
+              </div>
+            </div>
           </li>
           {channelLinks}
         </ul>

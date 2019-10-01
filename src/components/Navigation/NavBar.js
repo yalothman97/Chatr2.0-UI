@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 // Components
 import SideNav from "./SideNav";
 import AuthButton from "./AuthButton";
+import { connect } from "react-redux";
 
-const NavBar = () => {
+const NavBar = props => {
   return (
     <nav
       className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
@@ -26,11 +27,17 @@ const NavBar = () => {
         <span className="navbar-toggler-icon" />
       </button>
       <div className="collapse navbar-collapse" id="navbarResponsive">
-        <SideNav />
+        {!!props.user ? <SideNav /> : <div />}
         <AuthButton />
       </div>
     </nav>
   );
 };
 
-export default NavBar;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
+export default connect(mapStateToProps)(NavBar);

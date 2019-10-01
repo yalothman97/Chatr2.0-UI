@@ -676,3 +676,13 @@ footer.sticky-footer {
     width: calc(100% - 55px);
   }
 }
+
+.msg {
+  padding: 10px;
+  margin: 40px;
+  background-color: lightgray;
+}
+
+.bold {
+  font-weight: bold;
+}
