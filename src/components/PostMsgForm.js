@@ -1,37 +1,41 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { postChannel } from "../redux/actions";
+import { postMsg } from "../redux/actions";
 
-class AddChannelForm extends Component {
+class PostMsgForm extends Component {
   state = {
-    name: ""
+    message: ""
   };
 
   handleChange = event =>
     this.setState({ [event.target.name]: event.target.value });
 
-  handleSubmit = event => {
+  handleSubmit = (event, channelID) => {
     event.preventDefault();
-    this.props.postChannel(this.state);
+    this.props.postMsg(this.state, channelID);
+    this.props.triggerLoading();
+    this.setState({ message: "" });
   };
 
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form
+          onSubmit={event => this.handleSubmit(event, this.props.channelID)}
+        >
           <div className="form-group">
-            <label htmlFor="name">Name</label>
             <input
               type="text"
               className="form-control"
               id="name"
-              name="name"
-              placeholder="Name"
+              name="message"
+              placeholder="type your message"
+              value={this.state.message}
               onChange={this.handleChange}
             />
           </div>
           <button type="submit" className="btn btn-primary">
-            Add
+            post
           </button>
         </form>
       </div>
@@ -41,11 +45,11 @@ class AddChannelForm extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    postChannel: channelData => dispatch(postChannel(channelData))
+    postMsg: (message, channelID) => dispatch(postMsg(message, channelID))
   };
 };
 
 export default connect(
   null,
   mapDispatchToProps
-)(AddChannelForm);
+)(PostMsgForm);

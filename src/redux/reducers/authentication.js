@@ -1,8 +1,6 @@
 import { SET_CURRENT_USER } from "../actions/actionTypes";
 
-const initialState = {
-  user: null
-};
+const initialState = null;
 
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {

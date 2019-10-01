@@ -3,10 +3,12 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchChannelMsgs } from "../redux/actions";
+import PostMsgForm from "./PostMsgForm";
 
 class ChannelMsgs extends Component {
   state = {
-    interval: null
+    interval: null,
+    loading: false
   };
   componentDidMount() {
     let timestamp = "";
@@ -21,16 +23,28 @@ class ChannelMsgs extends Component {
 
     this.props.fetchChannelMsgs(this.props.match.params.channelID, timestamp);
     this.setState({
-      interval: setInterval(
-        () =>
-          this.props.fetchChannelMsgs(
-            this.props.match.params.channelID,
-            timestamp
-          ),
-        3000
-      )
+      interval: setInterval(() => {
+        let timestamp = "";
+        let channelID = this.props.match.params.channelID;
+        let channel = this.props.msgs.find(channel => channel.id == channelID);
+        if (channel) {
+          let prevmsgs = channel.messages;
+          if (prevmsgs.length !== 0) {
+            timestamp = prevmsgs[prevmsgs.length - 1].timestamp;
+          }
+        }
+        this.props.fetchChannelMsgs(
+          this.props.match.params.channelID,
+          timestamp
+        );
+        this.setState({ loading: false });
+      }, 3000)
     });
   }
+
+  triggerLoading = () => {
+    this.setState({ loading: !this.state.loading });
+  };
 
   componentDidUpdate(prevProps) {
     if (
@@ -48,14 +62,24 @@ class ChannelMsgs extends Component {
       }
       this.props.fetchChannelMsgs(this.props.match.params.channelID, timestamp);
       this.setState({
-        interval: setInterval(
-          () =>
-            this.props.fetchChannelMsgs(
-              this.props.match.params.channelID,
-              timestamp
-            ),
-          3000
-        )
+        interval: setInterval(() => {
+          let timestamp = "";
+          let channelID = this.props.match.params.channelID;
+          let channel = this.props.msgs.find(
+            channel => channel.id == channelID
+          );
+          if (channel) {
+            let prevmsgs = channel.messages;
+            if (prevmsgs.length !== 0) {
+              timestamp = prevmsgs[prevmsgs.length - 1].timestamp;
+            }
+          }
+          this.props.fetchChannelMsgs(
+            this.props.match.params.channelID,
+            timestamp
+          );
+          this.setState({ loading: false });
+        }, 3000)
       });
     }
   }
@@ -73,7 +97,30 @@ class ChannelMsgs extends Component {
           </div>
         </div>
       ));
-      return <div>{messages}</div>;
+      return (
+        <div>
+          {messages}
+          {this.state.loading && (
+            <div key={"loading"}>
+              <div className="msg">
+                <h2 className="bold">...Posting</h2>
+                <h6>From {this.props.user.username}</h6>
+                <small>time: ----</small>
+              </div>
+            </div>
+          )}
+          <footer>
+            <div className="panel-footer">
+              <div className="input-group">
+                <PostMsgForm
+                  triggerLoading={this.triggerLoading}
+                  channelID={channelID}
+                />
+              </div>
+            </div>
+          </footer>
+        </div>
+      );
     } else {
       return <div>Loading</div>;
     }
@@ -82,6 +129,7 @@ class ChannelMsgs extends Component {
 
 const mapStateToProps = state => {
   return {
+    user: state.user,
     msgs: state.channels.messages
   };
 };
@@ -95,3 +143,5 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(ChannelMsgs);
+
+// className = "form-control input-sm chat_input";

@@ -30,9 +30,9 @@ const AuthButton = ({ user, logout }) => {
       <>
         <span className="navbar-text">{user.username}</span>
         <li className="nav-item">
-          <span className="nav-link" onClick={() => logout()}>
+          <Link to="/welcome" className="nav-link" onClick={() => logout()}>
             <FontAwesomeIcon icon={faSignOutAlt} /> Logout
-          </span>
+          </Link>
         </li>
       </>
     );

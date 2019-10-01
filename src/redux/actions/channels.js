@@ -69,11 +69,6 @@ export const postMsg = (message, channelID) => {
         `https://api-chatr.herokuapp.com/channels/${channelID}/send/`,
         message
       );
-      const newMessage = res.data;
-      dispatch({
-        type: POST_MSG,
-        payload: newMessage
-      });
     } catch (error) {
       console.error(error.response.data);
     }

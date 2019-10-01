@@ -678,9 +678,11 @@ footer.sticky-footer {
 }
 
 .msg {
-  padding: 10px;
-  margin: 40px;
-  background-color: lightgray;
+  margin: 20px;
+  background-color: white;
+  padding: 20px 20px 20px 20px;
+  border: 2px solid lightgray;
+  font-family: Sofia Pro;
 }
 
 .bold {
