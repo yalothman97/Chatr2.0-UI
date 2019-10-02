@@ -4,11 +4,14 @@ import { postChannel } from "../redux/actions";
 
 class AddChannelForm extends Component {
   state = {
-    name: ""
+    name: "",
+    image_url: ""
   };
 
-  handleChange = event =>
+  handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
+    console.log("TCL: AddChannelForm -> image_url", event.target.files[0].name);
+  };
 
   handleSubmit = event => {
     event.preventDefault();
@@ -30,6 +33,17 @@ class AddChannelForm extends Component {
               onChange={this.handleChange}
             />
           </div>
+
+          <div>
+            <div>
+              <input
+                type="file"
+                name="image_url"
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+          <br />
           <button type="submit" className="btn btn-primary">
             Add
           </button>

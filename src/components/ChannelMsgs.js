@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchChannelMsgs } from "../redux/actions";
 import PostMsgForm from "./PostMsgForm";
