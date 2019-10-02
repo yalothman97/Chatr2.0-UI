@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchChannelMsgs } from "../redux/actions";
 import PostMsgForm from "./PostMsgForm";
+import NavBar from "./Navigation/NavBar";
 
 class ChannelMsgs extends Component {
   state = {
@@ -98,28 +99,31 @@ class ChannelMsgs extends Component {
         </div>
       ));
       return (
-        <div>
-          {messages}
-          {this.state.loading && (
-            <div key={"loading"}>
-              <div className="msg">
-                <h2 className="bold">...Posting</h2>
-                <h6>From {this.props.user.username}</h6>
-                <small>time: ----</small>
+        <>
+          <NavBar />
+          <div>
+            {messages}
+            {this.state.loading && (
+              <div key={"loading"}>
+                <div className="msg">
+                  <h2 className="bold">...Posting</h2>
+                  <h6>From {this.props.user.username}</h6>
+                  <small>time: ----</small>
+                </div>
               </div>
-            </div>
-          )}
-          <footer>
-            <div className="panel-footer">
-              <div className="input-group">
-                <PostMsgForm
-                  triggerLoading={this.triggerLoading}
-                  channelID={channelID}
-                />
+            )}
+            <footer>
+              <div className="panel-footer">
+                <div className="input-group">
+                  <PostMsgForm
+                    triggerLoading={this.triggerLoading}
+                    channelID={channelID}
+                  />
+                </div>
               </div>
-            </div>
-          </footer>
-        </div>
+            </footer>
+          </div>
+        </>
       );
     } else {
       return <div>Loading</div>;

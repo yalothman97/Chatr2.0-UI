@@ -12,7 +12,7 @@ const NavBar = props => {
       className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
       id="mainNav"
     >
-      <Link className="navbar-brand" to="/welcome">
+      <Link className="navbar-brand subhead" to="/home">
         Chatr2.0
       </Link>
       <button

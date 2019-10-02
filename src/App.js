@@ -5,12 +5,13 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import main from "./assets/js/main";
 
 // Components
-import NavBar from "./components/Navigation/NavBar";
+
 import Footer from "./components/Footer";
-import Welcome from "./components/Welcome";
+
 import RegistrationForm from "./components/RegistrationForm";
 import SuperSecretPage from "./components/SuperSecretPage";
 import ChannelMsgs from "./components/ChannelMsgs";
+import Home from "./components/Home";
 
 class App extends Component {
   componentDidMount() {
@@ -20,13 +21,12 @@ class App extends Component {
   render() {
     return (
       <div className="content-wrapper homeGradient">
-        <NavBar />
         <Switch>
-          <Route path="/welcome" component={Welcome} />
+          <Route path="/home" component={Home} />
           <Route path="/(login|signup)" component={RegistrationForm} />
           <Route path="/private" component={SuperSecretPage} />
           <Route path="/channels/:channelID" component={ChannelMsgs} />
-          <Redirect to="/welcome" />
+          <Redirect to="/home" />
         </Switch>
         <Footer />
       </div>

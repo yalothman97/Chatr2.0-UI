@@ -1,15 +1,19 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import NavBar from "./Navigation/NavBar";
 
 const SuperSecretPage = ({ user }) => {
   if (!user) return <Redirect to="/login" />;
 
   return (
-    <div>
-      <h1>this page has all the secrets</h1>
-      <p>now that you're logged in you can see this page</p>
-    </div>
+    <>
+      <NavBar />
+      <div className="center">
+        <h1 className="title">Welcome</h1>
+        <p className="subhead">Start Chatting</p>
+      </div>
+    </>
   );
 };
 

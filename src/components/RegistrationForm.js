@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { authorization, setErrors } from "../redux/actions";
+import NavBar from "./Navigation/NavBar";
 
 class RegistationForm extends Component {
   state = {
@@ -28,57 +29,61 @@ class RegistationForm extends Component {
     if (this.props.user) return <Redirect to="/private" />;
 
     return (
-      <div className="card col-6 mx-auto p-0 mt-5">
-        <div className="card-body">
-          <h5 className="card-title mb-4">
-            {type === "login"
-              ? "Login to send messages"
-              : "Register an account"}
-          </h5>
-          <form onSubmit={event => this.submitHandler(event, type)}>
-            {!!errors.length && (
-              <div className="alert alert-danger" role="alert">
-                {errors.map(error => (
-                  <p key={error}>{error}</p>
-                ))}
+      <>
+        <NavBar />
+
+        <div className="card col-6 mx-auto p-0 mt-5">
+          <div className="card-body">
+            <h5 className="card-title mb-4">
+              {type === "login"
+                ? "Login to send messages"
+                : "Register an account"}
+            </h5>
+            <form onSubmit={event => this.submitHandler(event, type)}>
+              {!!errors.length && (
+                <div className="alert alert-danger" role="alert">
+                  {errors.map(error => (
+                    <p key={error}>{error}</p>
+                  ))}
+                </div>
+              )}
+              <div className="form-group">
+                <input
+                  className="form-control"
+                  type="text"
+                  placeholder="Username"
+                  name="username"
+                  onChange={this.changeHandler}
+                />
               </div>
-            )}
-            <div className="form-group">
+              <div className="form-group">
+                <input
+                  className="form-control"
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  onChange={this.changeHandler}
+                />
+              </div>
               <input
-                className="form-control"
-                type="text"
-                placeholder="Username"
-                name="username"
-                onChange={this.changeHandler}
+                className="btn btn-primary"
+                type="submit"
+                value={type.replace(/^\w/, c => c.toUpperCase())}
               />
-            </div>
-            <div className="form-group">
-              <input
-                className="form-control"
-                type="password"
-                placeholder="Password"
-                name="password"
-                onChange={this.changeHandler}
-              />
-            </div>
-            <input
-              className="btn btn-primary"
-              type="submit"
-              value={type.replace(/^\w/, c => c.toUpperCase())}
-            />
-          </form>
+            </form>
+          </div>
+          <div className="card-footer">
+            <Link
+              to={type === "login" ? "/signup" : "/login"}
+              className="btn btn-small btn-link"
+            >
+              {type === "login"
+                ? "register an account"
+                : "login with an existing account"}
+            </Link>
+          </div>
         </div>
-        <div className="card-footer">
-          <Link
-            to={type === "login" ? "/signup" : "/login"}
-            className="btn btn-small btn-link"
-          >
-            {type === "login"
-              ? "register an account"
-              : "login with an existing account"}
-          </Link>
-        </div>
-      </div>
+      </>
     );
   }
 }

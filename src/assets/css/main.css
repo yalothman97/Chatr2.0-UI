@@ -24,6 +24,11 @@ body.fixed-nav {
   padding-top: 1rem;
 }
 
+.content-wrapper1 {
+  min-height: calc(100vh - 56px);
+  padding-top: 1rem;
+}
+
 .scroll-to-top {
   position: fixed;
   right: 15px;

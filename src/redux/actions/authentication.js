@@ -41,7 +41,7 @@ export const authorization = (userData, type, history) => {
       const user = res.data;
       dispatch(setErrors());
       dispatch(setCurrentUser(user.token));
-      if (history) history.goBack();
+      if (history) history.replace("/private");
     } catch (err) {
       console.error(err);
       dispatch({
