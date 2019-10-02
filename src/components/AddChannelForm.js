@@ -10,7 +10,6 @@ class AddChannelForm extends Component {
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
-    console.log("TCL: AddChannelForm -> image_url", event.target.files[0].name);
   };
 
   handleSubmit = event => {
@@ -34,13 +33,19 @@ class AddChannelForm extends Component {
             />
           </div>
 
-          <div>
-            <div>
+          <div class="input-group mb-3">
+            <div class="custom-file">
               <input
                 type="file"
                 name="image_url"
+                class="custom-file-input"
+                id="inputGroupFile01"
                 onChange={this.handleChange}
+                aria-describedby="inputGroupFileAddon01"
               />
+              <label class="custom-file-label" for="inputGroupFile01">
+                Choose file
+              </label>
             </div>
           </div>
           <br />
