@@ -688,3 +688,42 @@ footer.sticky-footer {
 .bold {
   font-weight: bold;
 }
+
+.homeGradient {
+  background: rgb(219, 219, 219);
+  background: linear-gradient(
+    156deg,
+    rgba(219, 219, 219, 1) 0%,
+    rgba(23, 44, 69, 1) 100%
+  );
+}
+
+/* .center {
+  text-align: center;
+  align-content: center;
+  align-items: center;
+  vertical-align: 200px;
+} */
+
+.center {
+  position: relative;
+  text-align: center;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 57%;
+  transform: translate(-50%, -50%);
+}
+
+.title {
+  font-family: Reross;
+  color: white;
+  font-size: 72px;
+}
+
+.subhead {
+  font-family: sofia pro;
+  font-weight: 400;
+  color: white;
+  font-size: 24px;
+}

@@ -4,15 +4,18 @@ import { connect } from "react-redux";
 
 const Welcome = props => {
   return (
-    <header className="masthead d-flex">
-      <div className="container text-center my-auto z-1">
-        <h1 className="mb-1">WELCOME TO CHATR</h1>
-        <h3 className="mb-5">
-          <em>You're gonna need to login to see the messages</em>
+    <header className="center">
+      <div className="">
+        <h1 className="title">chatr</h1>
+        <h3>
+          <p className="subhead">connecting the world</p>
         </h3>
         {!props.user && (
-          <Link to="/login" className="btn btn-primary btn-lg">
-            Login
+          <Link
+            to="/login"
+            className="f6 grow no-underline br-pill ph3 pv2 mb2 dib black bg-white"
+          >
+            login
           </Link>
         )}
       </div>

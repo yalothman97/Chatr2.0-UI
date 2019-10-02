@@ -19,7 +19,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="content-wrapper">
+      <div className="content-wrapper homeGradient">
         <NavBar />
         <Switch>
           <Route path="/welcome" component={Welcome} />
