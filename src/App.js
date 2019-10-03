@@ -20,15 +20,16 @@ class App extends Component {
 
   render() {
     return (
-      <div className="content-wrapper homeGradient">
-        <Switch>
-          <Route path="/home" component={Home} />
-          <Route path="/(login|signup)" component={RegistrationForm} />
-          <Route path="/private" component={SuperSecretPage} />
-          <Route path="/channels/:channelID" component={ChannelMsgs} />
-          <Redirect to="/home" />
-        </Switch>
-        <Footer />
+      <div className="">
+        <Route path="/home" component={Home} />
+        <div className="content-wrapper bg-transparent ">
+          <Switch>
+            <Route path="/(login|signup)" component={RegistrationForm} />
+            <Route path="/private" component={SuperSecretPage} />
+            <Route path="/channels/:channelID" component={ChannelMsgs} />
+            <Redirect to="/home" />
+          </Switch>
+        </div>
       </div>
     );
   }

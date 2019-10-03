@@ -5,6 +5,13 @@ html {
 
 body {
   overflow-x: hidden;
+
+  background: rgb(219, 219, 219);
+  background: linear-gradient(
+    140deg,
+    rgb(175, 47, 255) 0%,
+    rgb(0, 18, 220) 100%
+  );
 }
 
 body.sticky-footer {
@@ -662,7 +669,9 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
 
 footer.sticky-footer {
   position: absolute;
-  right: 0;
+
+  /* align-content: center; */
+  right: 60px;
   bottom: 0;
   width: 100%;
   height: 56px;
@@ -684,6 +693,8 @@ footer.sticky-footer {
 
 .msg {
   margin: 20px;
+  color: rgb(63, 63, 63);
+
   background-color: white;
   padding: 20px 20px 20px 20px;
   border: 2px solid lightgray;
@@ -698,9 +709,9 @@ footer.sticky-footer {
 .homeGradient {
   background: rgb(219, 219, 219);
   background: linear-gradient(
-    156deg,
-    rgba(219, 219, 219, 1) 0%,
-    rgba(23, 44, 69, 1) 100%
+    140deg,
+    rgb(175, 47, 255) 0%,
+    rgb(0, 18, 220) 100%
   );
 }
 
@@ -717,7 +728,7 @@ footer.sticky-footer {
   margin: 0;
   position: absolute;
   top: 50%;
-  left: 57%;
+  left: 50%;
   transform: translate(-50%, -50%);
 }
 
@@ -734,12 +745,32 @@ footer.sticky-footer {
   font-size: 24px;
 }
 
+.navlogo {
+  font-family: sofia pro;
+  font-weight: 400;
+  color: rgb(126, 18, 193) !important;
+  font-size: 24px;
+}
+
 #msgs {
   height: 800px;
 
   overflow: scroll;
 }
 
-/* .msgSize {
-  width: 1400px !important;
-} */
+.msgSize {
+  /* width: 1000px !important; */
+  height: 70px !important;
+}
+
+.ml13 {
+  font-size: 1.9em;
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
+  font-weight: 600;
+}
+
+.ml13 .letter {
+  display: inline-block;
+  line-height: 1em;
+}

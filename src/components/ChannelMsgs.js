@@ -9,7 +9,8 @@ import NavBar from "./Navigation/NavBar";
 class ChannelMsgs extends Component {
   state = {
     interval: null,
-    loading: false
+    loading: false,
+    tempMessage: ""
   };
   componentDidMount() {
     let timestamp = "";
@@ -42,6 +43,9 @@ class ChannelMsgs extends Component {
       }, 3000)
     });
   }
+  setTempMessage = text => {
+    this.setState({ tempMessage: text });
+  };
 
   triggerLoading = () => {
     this.setState({ loading: !this.state.loading });
@@ -113,7 +117,7 @@ class ChannelMsgs extends Component {
                 {this.state.loading && (
                   <div key={"loading"}>
                     <div className="msg">
-                      <h2 className="bold">...Posting</h2>
+                      <h2 className="bold">{this.state.tempMessage}</h2>
                       <h6>From {this.props.user.username}</h6>
                       <small>time: ----</small>
                     </div>
@@ -122,9 +126,10 @@ class ChannelMsgs extends Component {
               </div>
             </div>
             <footer>
-              <div className="row my-2 ">
-                <div className=" col-11 ml-2">
+              <div className="row my-2 mx-2 ">
+                <div className=" col-12">
                   <PostMsgForm
+                    setTempMessage={this.setTempMessage}
                     triggerLoading={this.triggerLoading}
                     channelID={channelID}
                   />

@@ -12,8 +12,8 @@ const NavBar = props => {
       className="navbar navbar-expand-lg navbar-light bg-light fixed-top"
       id="mainNav"
     >
-      <Link className="navbar-brand subhead" to="/home">
-        Chatr2.0
+      <Link className="navbar-brand navlogo" to="/home">
+        solif
       </Link>
       <button
         className="navbar-toggler navbar-toggler-right"

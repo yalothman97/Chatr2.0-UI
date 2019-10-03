@@ -7,8 +7,10 @@ class PostMsgForm extends Component {
     message: ""
   };
 
-  handleChange = event =>
+  handleChange = event => {
+    this.props.setTempMessage(event.target.value);
     this.setState({ [event.target.name]: event.target.value });
+  };
 
   handleSubmit = (event, channelID) => {
     event.preventDefault();
@@ -23,20 +25,27 @@ class PostMsgForm extends Component {
         <form
           onSubmit={event => this.handleSubmit(event, this.props.channelID)}
         >
-          <div className="form-group ">
+          <div className="input-group mb-3 mx-auto ">
             <input
               type="text"
               className="form-control msgSize"
               id="name"
               name="message"
               placeholder="type your message"
+              aria-describedby="button-addon2"
               value={this.state.message}
               onChange={this.handleChange}
             />
+            <div className="input-group-append">
+              <button
+                type="submit"
+                id="button-addon2"
+                className="btn btn-success"
+              >
+                post
+              </button>
+            </div>
           </div>
-          <button type="submit" className="btn btn-primary">
-            post
-          </button>
         </form>
       </div>
     );
