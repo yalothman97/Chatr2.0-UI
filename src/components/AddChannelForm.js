@@ -35,7 +35,6 @@ class AddChannelForm extends Component {
           <div class="input-group mb-3">
             <div className="form-group">
               <input
-                type="text"
                 className="form-control"
                 id="name"
                 name="image_url"

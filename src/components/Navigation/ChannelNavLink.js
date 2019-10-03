@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 // FontAwesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHashtag } from "@fortawesome/free-solid-svg-icons";
+import channeldefault from "./channeldefault.png";
 
 const ChannelNavLink = ({ channel }) => {
   return (
@@ -14,8 +15,17 @@ const ChannelNavLink = ({ channel }) => {
       title={channel.name}
     >
       <NavLink className="nav-link" to={`/channels/${channel.id}`}>
-        <FontAwesomeIcon icon={faHashtag} />
-        <span className="nav-link-text"> {channel.name}</span>
+        {channel.image_url ? (
+          <>
+            <img src={channel.image_url} className="channelImg" />
+            <span className="nav-link-text"> {channel.name}</span>
+          </>
+        ) : (
+          <>
+            <img src={channeldefault} className="channelImg" />
+            <span className="nav-link-text"> {channel.name}</span>
+          </>
+        )}
       </NavLink>
     </li>
   );
