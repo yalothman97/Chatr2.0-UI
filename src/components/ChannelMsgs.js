@@ -92,12 +92,13 @@ class ChannelMsgs extends Component {
   render() {
     let channelID = this.props.match.params.channelID;
     let channel = this.props.msgs.find(channel => channel.id == channelID);
+    let messages = [];
     if (channel) {
       let divObj = document.getElementById("msgs");
       if (divObj) {
         divObj.scrollTop = divObj.scrollHeight;
       }
-      let messages = channel.messages.map((message, idx) => (
+      messages = channel.messages.map((message, idx) => (
         <div key={idx}>
           <div className="msg">
             <h2 className="bold">{message.message}</h2>
@@ -106,42 +107,50 @@ class ChannelMsgs extends Component {
           </div>
         </div>
       ));
+    }
 
-      return (
-        <>
-          <NavBar />
-          <div>
-            <div className="row">
-              <div className="col-12" id="msgs">
-                {messages}
-                {this.state.loading && (
-                  <div key={"loading"}>
-                    <div className="msg">
-                      <h2 className="bold">{this.state.tempMessage}</h2>
-                      <h6>From {this.props.user.username}</h6>
-                      <small>time: ----</small>
+    return (
+      <>
+        <NavBar />
+        <div>
+          <div className="row">
+            <div className="col-12 mt-5 mb-3" id="msgs">
+              {channel ? (
+                <>
+                  {messages}
+                  {this.state.loading && (
+                    <div key={"loading"}>
+                      <div className="msg">
+                        <h2 className="bold">{this.state.tempMessage}</h2>
+                        <h6>From {this.props.user.username}</h6>
+                        <small>time: ----</small>
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
+                </>
+              ) : (
+                <div class="spinner">
+                  <div class="bounce1"></div>
+                  <div class="bounce2"></div>
+                  <div class="bounce3"></div>
+                </div>
+              )}
+            </div>
+          </div>
+          <footer>
+            <div className="row my-2 mx-2 ">
+              <div className=" col-12">
+                <PostMsgForm
+                  setTempMessage={this.setTempMessage}
+                  triggerLoading={this.triggerLoading}
+                  channelID={channelID}
+                />
               </div>
             </div>
-            <footer>
-              <div className="row my-2 mx-2 ">
-                <div className=" col-12">
-                  <PostMsgForm
-                    setTempMessage={this.setTempMessage}
-                    triggerLoading={this.triggerLoading}
-                    channelID={channelID}
-                  />
-                </div>
-              </div>
-            </footer>
-          </div>
-        </>
-      );
-    } else {
-      return <div>Loading</div>;
-    }
+          </footer>
+        </div>
+      </>
+    );
   }
 }
 

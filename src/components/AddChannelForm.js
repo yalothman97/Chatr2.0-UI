@@ -22,7 +22,6 @@ class AddChannelForm extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <label htmlFor="name">Name</label>
             <input
               type="text"
               className="form-control"
@@ -34,21 +33,17 @@ class AddChannelForm extends Component {
           </div>
 
           <div class="input-group mb-3">
-            <div class="custom-file">
+            <div className="form-group">
               <input
-                type="file"
+                type="text"
+                className="form-control"
+                id="name"
                 name="image_url"
-                class="custom-file-input"
-                id="inputGroupFile01"
+                placeholder="image url"
                 onChange={this.handleChange}
-                aria-describedby="inputGroupFileAddon01"
               />
-              <label class="custom-file-label" for="inputGroupFile01">
-                Choose file
-              </label>
             </div>
           </div>
-          <br />
           <button type="submit" className="btn btn-primary">
             Add
           </button>
