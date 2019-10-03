@@ -13,12 +13,24 @@ import {
 import ChannelNavLink from "./ChannelNavLink";
 import { connect } from "react-redux";
 import AddChannelForm from "../AddChannelForm";
+import SearchBar from "../SearchBar";
 
 class SideNav extends React.Component {
-  state = { collapsed: false };
+  state = {
+    collapsed: false,
+    query: "",
+    filteredChannels: this.props.channels
+  };
+
+  search = query => {
+    this.setState({ query });
+  };
 
   render() {
-    const channelLinks = this.props.channels.map(channel => (
+    let channels = this.props.channels.filter(channel =>
+      channel.name.toLowerCase().includes(this.state.query.toLowerCase())
+    );
+    const channelLinks = channels.map(channel => (
       <ChannelNavLink key={channel.name} channel={channel} />
     ));
     return (
@@ -44,6 +56,7 @@ class SideNav extends React.Component {
               </div>
             </div>
           </li>
+          <SearchBar search={this.search} />
           {channelLinks}
         </ul>
         <ul className="navbar-nav sidenav-toggler">
