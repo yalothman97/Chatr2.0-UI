@@ -42,7 +42,7 @@ class PostMsgForm extends Component {
                 id="button-addon2"
                 className="btn btn-success"
               >
-                post
+                send
               </button>
             </div>
           </div>
