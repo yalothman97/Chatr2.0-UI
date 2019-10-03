@@ -89,6 +89,10 @@ class ChannelMsgs extends Component {
     let channelID = this.props.match.params.channelID;
     let channel = this.props.msgs.find(channel => channel.id == channelID);
     if (channel) {
+      let divObj = document.getElementById("msgs");
+      if (divObj) {
+        divObj.scrollTop = divObj.scrollHeight;
+      }
       let messages = channel.messages.map((message, idx) => (
         <div key={idx}>
           <div className="msg">
@@ -98,23 +102,28 @@ class ChannelMsgs extends Component {
           </div>
         </div>
       ));
+
       return (
         <>
           <NavBar />
           <div>
-            {messages}
-            {this.state.loading && (
-              <div key={"loading"}>
-                <div className="msg">
-                  <h2 className="bold">...Posting</h2>
-                  <h6>From {this.props.user.username}</h6>
-                  <small>time: ----</small>
-                </div>
+            <div className="row">
+              <div className="col-12" id="msgs">
+                {messages}
+                {this.state.loading && (
+                  <div key={"loading"}>
+                    <div className="msg">
+                      <h2 className="bold">...Posting</h2>
+                      <h6>From {this.props.user.username}</h6>
+                      <small>time: ----</small>
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
+            </div>
             <footer>
-              <div className="panel-footer">
-                <div className="input-group">
+              <div className="row my-2 ">
+                <div className=" col-11 ml-2">
                   <PostMsgForm
                     triggerLoading={this.triggerLoading}
                     channelID={channelID}

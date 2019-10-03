@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 const NavBar = props => {
   return (
     <nav
-      className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+      className="navbar navbar-expand-lg navbar-light bg-light fixed-top"
       id="mainNav"
     >
       <Link className="navbar-brand subhead" to="/home">

@@ -688,6 +688,7 @@ footer.sticky-footer {
   padding: 20px 20px 20px 20px;
   border: 2px solid lightgray;
   font-family: Sofia Pro;
+  border-radius: 15px;
 }
 
 .bold {
@@ -721,7 +722,7 @@ footer.sticky-footer {
 }
 
 .title {
-  font-family: Reross;
+  font-family: Sofia pro;
   color: white;
   font-size: 72px;
 }
@@ -732,3 +733,13 @@ footer.sticky-footer {
   color: white;
   font-size: 24px;
 }
+
+#msgs {
+  height: 800px;
+
+  overflow: scroll;
+}
+
+/* .msgSize {
+  width: 1400px !important;
+} */

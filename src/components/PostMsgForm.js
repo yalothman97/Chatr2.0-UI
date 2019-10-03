@@ -23,10 +23,10 @@ class PostMsgForm extends Component {
         <form
           onSubmit={event => this.handleSubmit(event, this.props.channelID)}
         >
-          <div className="form-group">
+          <div className="form-group ">
             <input
               type="text"
-              className="form-control"
+              className="form-control msgSize"
               id="name"
               name="message"
               placeholder="type your message"
