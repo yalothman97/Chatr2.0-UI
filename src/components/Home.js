@@ -2,13 +2,32 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Footer from "./Footer";
+import anime from "animejs/lib/anime.es.js";
 
 const Home = props => {
+  var textWrapper = document.querySelector(".ml13");
+  if (textWrapper) {
+    textWrapper.innerHTML = textWrapper.textContent.replace(
+      /\S/g,
+      "<span class='letter'>$&</span>"
+    );
+
+    anime.timeline({ loop: false }).add({
+      targets: ".ml13 .letter",
+      translateY: [100, 0],
+      translateZ: 0,
+      opacity: [0, 1],
+      easing: "easeOutExpo",
+      duration: 1000,
+      delay: (el, i) => 0 + 30 * i
+    });
+  }
+
   return (
     <>
       <header className="center">
         <div className="">
-          <h1 className="title">solif</h1>
+          <h1 className="title ml13">solif</h1>
           <h3>
             <p className="subhead">swalif all around</p>
           </h3>
